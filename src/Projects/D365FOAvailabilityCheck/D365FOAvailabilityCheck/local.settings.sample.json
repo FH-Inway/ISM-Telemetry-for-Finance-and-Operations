@@ -1,0 +1,19 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+
+    "AvailabilityChecks.ApplicationInsightsConnectionString": "InstrumentationKey=xxx",
+    "AvailabilityChecks.BaseURL": "https://d365foenvironment.axcloud.dynamics.com",
+    "AvailabilityChecks.RegionName": "West Europe",
+
+    "AvailabilityChecks.IdentityServerAuthorizeEndpoint": "https://login.microsoftonline.com/<tenant-id>/oauth2/token",
+    "AvailabilityChecks.IdentityServerClientId": "<App Registration Client Id>",
+    "AvailabilityChecks.IdentityServerClientSecret": "<App Registration Client Secret>",
+
+    "AvailabilityChecks.GetLegalEntitiesCheckSchedule": "0 */5 * * * *",
+    "AvailabilityChecks.GetLegalEntitiesEndpoint": "/data/LegalEntities?$filter=LegalEntityId eq 'dat'&$select=LegalEntityId,Name",
+    "AvailabilityChecks.GetLegalEntitiesExpectedResponse": "Company accounts data"
+  }
+}
