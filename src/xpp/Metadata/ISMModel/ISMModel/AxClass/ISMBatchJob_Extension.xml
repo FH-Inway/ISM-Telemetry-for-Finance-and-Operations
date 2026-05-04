@@ -22,11 +22,8 @@ public final class ISMBatchJob_Extension
     {
         try
         {
-            if(this.Status != this.orig().Status)
-            {
-                ISMTelemetryBatch batch = ISMTelemetryBatch::construct(this.orig(), this);
-                batch.processEvent(ISMTelemetryEventNames::BatchJobStatusUpdate);
-            }
+            ISMTelemetryBatch batch = ISMTelemetryBatch::construct(this.orig(), this);
+            batch.processEvent(ISMTelemetryEventNames::BatchJobStatusUpdate);
         }
         catch
         {
