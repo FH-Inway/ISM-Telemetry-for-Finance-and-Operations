@@ -142,7 +142,7 @@ public class ISMTelemetryBatch extends ISMTelemetryBase
         if(batchJobUpdateTmp == null)
         {
             this.addRuntimeProperty(ISMTelemetryProperties::NewStatus, enum2Str(batchJob.Status));
-            this.addRuntimeProperty(ISMTelemetryProperties::OrigStartDateTime, datetime2Str(batchJobUpdateTmp.OrigStartDateTime));
+            this.addRuntimeProperty(ISMTelemetryProperties::OrigStartDateTime, datetime2Str(batchJob.OrigStartDateTime));
             this.addRuntimeProperty(ISMTelemetryProperties::StartDateTime, datetime2Str(batchJob.StartDateTime));
             this.addRuntimeProperty(ISMTelemetryProperties::EndDateTime, datetime2Str(batchJob.EndDateTime));
         }
@@ -203,16 +203,43 @@ public class ISMTelemetryBatch extends ISMTelemetryBase
         SysInfologMessageStruct msgStruct;
         Exception               exception;
         str                     error;
-
-        
+        str                     currentMessage;
+        int                     maxErrorLength = 2048;  // Maximum total length for error string
+        int                     messageCount = 0;
+        const int               maxMessages = 42;       // Maximum number of messages to process
+        boolean                 truncated = false;
 
         enumerator = SysInfologEnumerator::newData(infoLogData);
 
-        while (enumerator.moveNext())
+        while (enumerator.moveNext() && messageCount < maxMessages)
         {
             msgStruct = new SysInfologMessageStruct(enumerator.currentMessage());
             exception = enumerator.currentException();
-            error = strfmt("@SYS82282"+ ' '+"@MCR26302", error, msgStruct.message());
+
+            currentMessage = msgStruct.message();
+
+            // Check if adding this message would exceed the limit
+            if (strLen(error) + strLen(currentMessage) + 50 > maxErrorLength) // 50 chars buffer for formatting
+            {
+                truncated = true;
+                break;
+            }
+
+            // Limit individual message length to prevent single huge messages
+            if (strLen(currentMessage) > 500)
+            {
+                currentMessage = subStr(currentMessage, 1, 500) + '...';
+            }
+
+            error = strfmt("@SYS82282"+ ' '+"@MCR26302", error, currentMessage);
+
+            messageCount++;
+        }
+
+        // Add truncation notice if needed
+        if (truncated || (enumerator.moveNext() && messageCount >= maxMessages))
+        {
+            error = error + strFmt(' [Truncated: %1+ messages total]', messageCount);
         }
 
         return error;

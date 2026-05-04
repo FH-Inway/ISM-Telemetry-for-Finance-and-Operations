@@ -11,7 +11,6 @@
 [ExtensionOf(tableStr(Batch))]
 public final class ISMBatch_Extension
 {
-
 }
 ]]></Declaration>
 		<Methods>
@@ -35,10 +34,7 @@ public final class ISMBatch_Extension
             Global::exceptionTextFallThrough();
         }
 
-
-
         next update();
-
     }
 
 ]]></Source>
