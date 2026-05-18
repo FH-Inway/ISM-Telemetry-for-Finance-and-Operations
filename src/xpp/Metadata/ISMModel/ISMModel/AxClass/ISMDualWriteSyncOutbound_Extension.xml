@@ -35,8 +35,6 @@ public final class ISMDualWriteSyncOutbound_Extension
         
         next writeEntityRecordToCDS(_entityRecord, _isDelete, _isBatchCommit);
 
-        this.checkForModifications = false;
-
         ResponseContract response = this.responseContract; 
 
         if (response.ExecutionStatus == ExecutionStatus::Failed)
