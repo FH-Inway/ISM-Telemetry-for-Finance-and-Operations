@@ -3,49 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\Projects\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_AgreementAutolinkHelperPurchLine.xpp||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMBatchJob_Extension.xpp||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxTable_AgreementLine.xpp||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxTable_PurchLine.xpp||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\AppData\\Local\\Microsoft\\Dynamics365\\10.0.2263.93\\PackagesLocalDirectory\\ApplicationSuite\\Foundation\\AxTable\\PurchLine.xml||{7DCB09FF-3066-475F-9286-662C3C505513}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_SalesPurchLineInterface.xpp||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_AgreementAutolinkHelper.xpp||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMTelemetryBase.xpp||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_InventItemPriceActivationTaskActivateSim.xpp||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMInventItemPriceActivationTaskActivateSim_Extension.xpp||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMTelemetryGeneric.xpp||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxTable_ISMTelemetryParameters.xpp||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ApplicationPlatform\\AxClass_Global.xpp||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMDMFPackageExporter_Extension.xpp||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\ISMModel\\ISMModel\\AxTable\\ISMTelemetryParameters.xml||{7DCB09FF-3066-475F-9286-662C3C505513}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\ISMModel\\ISMModel\\AxTable\\ISMTelemetryParameterSetup.xml||{7DCB09FF-3066-475F-9286-662C3C505513}|"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMBatch_Extension.xpp||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -55,7 +16,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 16,
           "Children": [
             {
               "$type": "Bookmark",
@@ -103,7 +64,15 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:5:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Bookmark",
@@ -112,184 +81,36 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "AgreementLine.xpp",
-              "DocumentMoniker": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxTable_AgreementLine.xpp",
-              "RelativeDocumentMoniker": "..\\xpp\\Metadata\\XppSource\\Foundation\\AxTable_AgreementLine.xpp",
-              "ToolTip": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxTable_AgreementLine.xpp",
-              "RelativeToolTip": "..\\xpp\\Metadata\\XppSource\\Foundation\\AxTable_AgreementLine.xpp",
-              "ViewState": "AgIAAJoDAAAAAAAAAAAcwK8DAAANAAAAAAAAAA==",
+              "Title": "AxClass_ISMBatch_Extension.xpp",
+              "DocumentMoniker": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMBatch_Extension.xpp",
+              "RelativeDocumentMoniker": "..\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMBatch_Extension.xpp",
+              "ToolTip": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMBatch_Extension.xpp",
+              "RelativeToolTip": "..\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMBatch_Extension.xpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-13T13:08:51.029Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AgreementAutolinkHelperPurchLine.xpp",
-              "DocumentMoniker": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_AgreementAutolinkHelperPurchLine.xpp",
-              "RelativeDocumentMoniker": "..\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_AgreementAutolinkHelperPurchLine.xpp",
-              "ToolTip": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_AgreementAutolinkHelperPurchLine.xpp",
-              "RelativeToolTip": "..\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_AgreementAutolinkHelperPurchLine.xpp",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACUAAABjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-13T13:08:33.522Z",
+              "WhenOpened": "2026-05-04T10:59:07.158Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PurchLine.xpp",
-              "DocumentMoniker": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxTable_PurchLine.xpp",
-              "RelativeDocumentMoniker": "..\\xpp\\Metadata\\XppSource\\Foundation\\AxTable_PurchLine.xpp",
-              "ToolTip": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxTable_PurchLine.xpp",
-              "RelativeToolTip": "..\\xpp\\Metadata\\XppSource\\Foundation\\AxTable_PurchLine.xpp",
-              "ViewState": "AgIAAMgBAAAAAAAAAAAUwOoBAABVAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "AxClass_ISMBatchJob_Extension.xpp",
+              "DocumentMoniker": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMBatchJob_Extension.xpp",
+              "RelativeDocumentMoniker": "..\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMBatchJob_Extension.xpp",
+              "ToolTip": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMBatchJob_Extension.xpp",
+              "RelativeToolTip": "..\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMBatchJob_Extension.xpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-13T13:08:06.84Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PurchLine.xml",
-              "DocumentMoniker": "C:\\Users\\maxhentschel\\AppData\\Local\\Microsoft\\Dynamics365\\10.0.2263.93\\PackagesLocalDirectory\\ApplicationSuite\\Foundation\\AxTable\\PurchLine.xml",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\AppData\\Local\\Microsoft\\Dynamics365\\10.0.2263.93\\PackagesLocalDirectory\\ApplicationSuite\\Foundation\\AxTable\\PurchLine.xml",
-              "ToolTip": "C:\\Users\\maxhentschel\\AppData\\Local\\Microsoft\\Dynamics365\\10.0.2263.93\\PackagesLocalDirectory\\ApplicationSuite\\Foundation\\AxTable\\PurchLine.xml\r\nType: Table\r\nModel: Foundation",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "OverriddenToolTip": "C:\\Users\\maxhentschel\\AppData\\Local\\Microsoft\\Dynamics365\\10.0.2263.93\\PackagesLocalDirectory\\ApplicationSuite\\Foundation\\AxTable\\PurchLine.xml\r\nType: Table\r\nModel: Foundation",
-              "WhenOpened": "2025-10-13T13:08:06.862Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AgreementAutolinkHelper.xpp",
-              "DocumentMoniker": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_AgreementAutolinkHelper.xpp",
-              "RelativeDocumentMoniker": "..\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_AgreementAutolinkHelper.xpp",
-              "ToolTip": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_AgreementAutolinkHelper.xpp",
-              "RelativeToolTip": "..\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_AgreementAutolinkHelper.xpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-13T13:07:48.14Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SalesPurchLineInterface.xpp",
-              "DocumentMoniker": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_SalesPurchLineInterface.xpp",
-              "RelativeDocumentMoniker": "..\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_SalesPurchLineInterface.xpp",
-              "ToolTip": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_SalesPurchLineInterface.xpp",
-              "RelativeToolTip": "..\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_SalesPurchLineInterface.xpp",
-              "ViewState": "AgIAAPwFAAAAAAAAAAAQwPwFAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-13T13:07:17.016Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ISMTelemetryParameters.xpp",
-              "DocumentMoniker": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxTable_ISMTelemetryParameters.xpp",
-              "RelativeDocumentMoniker": "..\\xpp\\Metadata\\XppSource\\ISMModel\\AxTable_ISMTelemetryParameters.xpp",
-              "ToolTip": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxTable_ISMTelemetryParameters.xpp",
-              "RelativeToolTip": "..\\xpp\\Metadata\\XppSource\\ISMModel\\AxTable_ISMTelemetryParameters.xpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-09-30T12:18:13.74Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Global.xpp",
-              "DocumentMoniker": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ApplicationPlatform\\AxClass_Global.xpp",
-              "RelativeDocumentMoniker": "..\\xpp\\Metadata\\XppSource\\ApplicationPlatform\\AxClass_Global.xpp",
-              "ToolTip": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ApplicationPlatform\\AxClass_Global.xpp",
-              "RelativeToolTip": "..\\xpp\\Metadata\\XppSource\\ApplicationPlatform\\AxClass_Global.xpp",
-              "ViewState": "AgIAAFgQAAAAAAAAAAAIwGwQAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-05-23T14:59:20.599Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ISMTelemetryBase.xpp",
-              "DocumentMoniker": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMTelemetryBase.xpp",
-              "RelativeDocumentMoniker": "..\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMTelemetryBase.xpp",
-              "ToolTip": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMTelemetryBase.xpp",
-              "RelativeToolTip": "..\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMTelemetryBase.xpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-05-23T14:53:11.807Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ISMDMFPackageExporter_Extension.xpp",
-              "DocumentMoniker": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMDMFPackageExporter_Extension.xpp",
-              "RelativeDocumentMoniker": "..\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMDMFPackageExporter_Extension.xpp",
-              "ToolTip": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMDMFPackageExporter_Extension.xpp",
-              "RelativeToolTip": "..\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMDMFPackageExporter_Extension.xpp",
-              "ViewState": "AgIAAA8AAAAAAAAAAIBJwCcAAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-05-23T14:29:38.718Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ISMInventItemPriceActivationTaskActivateSim_Extension.xpp",
-              "DocumentMoniker": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMInventItemPriceActivationTaskActivateSim_Extension.xpp",
-              "RelativeDocumentMoniker": "..\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMInventItemPriceActivationTaskActivateSim_Extension.xpp",
-              "ToolTip": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMInventItemPriceActivationTaskActivateSim_Extension.xpp",
-              "RelativeToolTip": "..\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMInventItemPriceActivationTaskActivateSim_Extension.xpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABTAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-05-19T12:29:34.748Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ISMTelemetryGeneric.xpp",
-              "DocumentMoniker": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMTelemetryGeneric.xpp",
-              "RelativeDocumentMoniker": "..\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMTelemetryGeneric.xpp",
-              "ToolTip": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMTelemetryGeneric.xpp",
-              "RelativeToolTip": "..\\xpp\\Metadata\\XppSource\\ISMModel\\AxClass_ISMTelemetryGeneric.xpp",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAgwBAAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-05-19T12:28:16.532Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "InventItemPriceActivationTaskActivateSim.xpp",
-              "DocumentMoniker": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_InventItemPriceActivationTaskActivateSim.xpp",
-              "RelativeDocumentMoniker": "..\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_InventItemPriceActivationTaskActivateSim.xpp",
-              "ToolTip": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_InventItemPriceActivationTaskActivateSim.xpp",
-              "RelativeToolTip": "..\\xpp\\Metadata\\XppSource\\Foundation\\AxClass_InventItemPriceActivationTaskActivateSim.xpp",
-              "ViewState": "AgIAAKAAAAAAAAAAAAAcwMYAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-05-15T13:18:44.179Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ISMTelemetryParameters.xml",
-              "DocumentMoniker": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\ISMModel\\ISMModel\\AxTable\\ISMTelemetryParameters.xml",
-              "RelativeDocumentMoniker": "..\\xpp\\Metadata\\ISMModel\\ISMModel\\AxTable\\ISMTelemetryParameters.xml",
-              "ToolTip": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\ISMModel\\ISMModel\\AxTable\\ISMTelemetryParameters.xml",
-              "RelativeToolTip": "..\\xpp\\Metadata\\ISMModel\\ISMModel\\AxTable\\ISMTelemetryParameters.xml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2026-02-02T12:30:41.783Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "ISMTelemetryParameterSetup.xml",
-              "DocumentMoniker": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\ISMModel\\ISMModel\\AxTable\\ISMTelemetryParameterSetup.xml",
-              "RelativeDocumentMoniker": "..\\xpp\\Metadata\\ISMModel\\ISMModel\\AxTable\\ISMTelemetryParameterSetup.xml",
-              "ToolTip": "C:\\Users\\maxhentschel\\source\\repos\\ISM-Telemetry-for-Finance-and-Operations\\src\\xpp\\Metadata\\ISMModel\\ISMModel\\AxTable\\ISMTelemetryParameterSetup.xml",
-              "RelativeToolTip": "..\\xpp\\Metadata\\ISMModel\\ISMModel\\AxTable\\ISMTelemetryParameterSetup.xml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2026-02-02T12:30:41.791Z"
+              "WhenOpened": "2026-05-04T10:59:07.247Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1d26fd06-26e2-4dff-9e7c-b00ee5135893}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             }
           ]
         }
