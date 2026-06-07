@@ -32,6 +32,7 @@ v17
 
 ## keep VS Projects in PackagesLocalDirectory\Projects
 !/Projects
+src/Projects/**/obj/**
 
 ## Also include the following files in root of PackagesLocalDirectory
 !.gitignore
