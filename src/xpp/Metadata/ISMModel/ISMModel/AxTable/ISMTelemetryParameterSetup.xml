@@ -58,7 +58,12 @@ public class ISMTelemetryParameterSetup extends common
             while (listEnumerator.moveNext())
             {
                 ClassId childClassId = listEnumerator.current();
-                ISMTelemetryBase telemetry = new SysDictClass(childClassId).makeObject();
+                SysDictClass childDictClass = new SysDictClass(childClassId);
+                if (childDictClass.isAbstract())
+                {
+                    continue;
+                }
+                ISMTelemetryBase telemetry = childDictClass.makeObject();
                 telemetry.initialize();
                 ISMTelemetryParameterSetup telemetryParameterSetup = telemetry.getParameterSetup();
                 if (!telemetryParameterSetup

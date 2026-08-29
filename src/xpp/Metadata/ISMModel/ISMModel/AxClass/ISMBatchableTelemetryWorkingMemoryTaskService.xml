@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ISMBatchableTelemetryWorkingMemoryTaskService</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+// using Microsoft.VisualBasic.Devices;
+
+public class ISMBatchableTelemetryWorkingMemoryTaskService extends SysOperationServiceBase
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>processOperation</Name>
+				<Source><![CDATA[
+    public void processOperation()
+    {
+        ISMBatchableTelemetryWorkingMemory workingMemory = ISMBatchableTelemetryWorkingMemory::construct();
+
+        System.Diagnostics.PerformanceCounter memoryPerformanceCounter = 
+            new System.Diagnostics.PerformanceCounter('Memory', 'Available MBytes');
+        real totalAvailableRAM = memoryPerformanceCounter.RawValue;
+
+        /*
+        Microsoft.VisualBasic.Devices.ComputerInfo computerInfo =
+            new Microsoft.VisualBasic.Devices.ComputerInfo();
+        real totalPhysicalMemory = computerInfo.TotalPhysicalMemory / 1024 / 1024;
+        */
+
+        workingMemory.processMetric(totalAvailableRAM);
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

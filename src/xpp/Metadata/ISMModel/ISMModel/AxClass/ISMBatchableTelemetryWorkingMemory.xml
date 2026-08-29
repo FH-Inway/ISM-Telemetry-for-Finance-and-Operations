@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ISMBatchableTelemetryWorkingMemory</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public class ISMBatchableTelemetryWorkingMemory extends ISMBatchableTelemetryBase
+{
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>construct</Name>
+				<Source><![CDATA[
+    public static ISMBatchableTelemetryWorkingMemory construct()
+    {
+        ISMBatchableTelemetryWorkingMemory workingMemory = new ISMBatchableTelemetryWorkingMemory();
+        return workingMemory;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>postPopulateProperties</Name>
+				<Source><![CDATA[
+    protected void postPopulateProperties()
+    {
+
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>shouldLogEvent</Name>
+				<Source><![CDATA[
+    protected boolean shouldLogEvent()
+    {
+        return true;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>metricName</Name>
+				<Source><![CDATA[
+    protected ClassName metricName()
+    {
+        return 'Memory';
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>initializeBatchableParameterSetup</Name>
+				<Source><![CDATA[
+    protected void initializeBatchableParameterSetup(
+        ISMBatchableTelemetryParameterSetup _batchableTelemetryParameterSetup)
+    {
+        super(_batchableTelemetryParameterSetup);
+
+        _batchableTelemetryParameterSetup.BatchableTelemetryClass = 
+            classId2Name(classNum(ISMBatchableTelemetryWorkingMemoryTaskService));
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

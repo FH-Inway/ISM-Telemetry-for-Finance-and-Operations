@@ -33,6 +33,41 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="AxClass\ISMBatchableTelemetryBase">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryBase</Name>
+      <Link>BatchableTelemetry\ISMBatchableTelemetryBase</Link>
+    </Content>
+    <Content Include="AxClass\ISMBatchableTelemetryBatchStart">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryBatchStart</Name>
+      <Link>BatchableTelemetry\ISMBatchableTelemetryBatchStart</Link>
+    </Content>
+    <Content Include="AxClass\ISMBatchableTelemetryController">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryController</Name>
+      <Link>BatchableTelemetry\ISMBatchableTelemetryController</Link>
+    </Content>
+    <Content Include="AxClass\ISMBatchableTelemetryService">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryService</Name>
+      <Link>BatchableTelemetry\ISMBatchableTelemetryService</Link>
+    </Content>
+    <Content Include="AxClass\ISMBatchableTelemetryTaskController">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryTaskController</Name>
+      <Link>BatchableTelemetry\ISMBatchableTelemetryTaskController</Link>
+    </Content>
+    <Content Include="AxClass\ISMBatchableTelemetryWorkingMemory">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryWorkingMemory</Name>
+      <Link>WorkingMemory\ISMBatchableTelemetryWorkingMemory</Link>
+    </Content>
+    <Content Include="AxClass\ISMBatchableTelemetryWorkingMemoryTaskService">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryWorkingMemoryTaskService</Name>
+      <Link>WorkingMemory\ISMBatchableTelemetryWorkingMemoryTaskService</Link>
+    </Content>
     <Content Include="AxClass\ISMBatchJob_Extension">
       <SubType>Content</SubType>
       <Name>ISMBatchJob_Extension</Name>
@@ -198,6 +233,36 @@
       <Name>ISMTelemetryProperty</Name>
       <Link>Base objects\ISMTelemetryProperty</Link>
     </Content>
+    <Content Include="AxEdt\ISMBatchableTelemetryClass">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryClass</Name>
+      <Link>BatchableTelemetry\ISMBatchableTelemetryClass</Link>
+    </Content>
+    <Content Include="AxEdt\ISMBatchableTelemetryIntervalValue">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryIntervalValue</Name>
+      <Link>ISMBatchableTelemetryIntervalValue</Link>
+    </Content>
+    <Content Include="AxEdt\ISMBatchableTelemetryMaxDuration">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryMaxDuration</Name>
+      <Link>ISMBatchableTelemetryMaxDuration</Link>
+    </Content>
+    <Content Include="AxEdt\ISMBatchableTelemetryPollingDelay">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryPollingDelay</Name>
+      <Link>ISMBatchableTelemetryPollingDelay</Link>
+    </Content>
+    <Content Include="AxEdt\ISMBatchableTelemetryRunOnAllAOS">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryRunOnAllAOS</Name>
+      <Link>ISMBatchableTelemetryRunOnAllAOS</Link>
+    </Content>
+    <Content Include="AxEdt\ISMBatchableTelemetryTaskCount">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryTaskCount</Name>
+      <Link>ISMBatchableTelemetryTaskCount</Link>
+    </Content>
     <Content Include="AxEdt\ISMIsEnabled">
       <SubType>Content</SubType>
       <Name>ISMIsEnabled</Name>
@@ -228,6 +293,16 @@
       <Name>ISM_en-US</Name>
       <Link>Base objects\ISM_en-US</Link>
     </Content>
+    <Content Include="AxMenuItemAction\ISMBatchableTelemetryBatchStart">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryBatchStart</Name>
+      <Link>BatchableTelemetry\ISMBatchableTelemetryBatchStart</Link>
+    </Content>
+    <Content Include="AxTable\ISMBatchableTelemetryParameterSetup">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryParameterSetup</Name>
+      <Link>BatchableTelemetry\ISMBatchableTelemetryParameterSetup</Link>
+    </Content>
     <Content Include="AxTable\ISMTelemetryParameters">
       <SubType>Content</SubType>
       <Name>ISMTelemetryParameters</Name>
@@ -254,6 +329,8 @@
     <Folder Include="BusinessEvent" />
     <Folder Include="CostActivation" />
     <Folder Include="Infolog Telemetry" />
+    <Folder Include="BatchableTelemetry" />
+    <Folder Include="WorkingMemory" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
   <Import Project="$(BuildTasksDirectory)\Microsoft.Dynamics.Framework.Tools.BuildTasks.17.0.targets" />

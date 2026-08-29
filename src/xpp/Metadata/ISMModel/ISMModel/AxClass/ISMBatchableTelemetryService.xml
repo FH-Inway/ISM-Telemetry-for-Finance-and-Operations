@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ISMBatchableTelemetryService</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public class ISMBatchableTelemetryService extends SysOperationServiceBase
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>processOperation</Name>
+				<Source><![CDATA[
+    public void processOperation(ISMBatchableTelemetryContract _contract)
+    {
+        /*
+        int64 batchElapsedHours;
+        int maxBatchHours = SABatchTracingParameters::findOrCreate().MaxBatchHours;
+        int taskCreatePerBundle = SABatchTracingParameters::findOrCreate().TaskCreatePerBundle;
+        int pollingDelayTaskBundle = SABatchTracingParameters::findOrCreate().PollingDelayTaskBundle;
+        boolean startRequested = false;
+        boolean stopRequested = true;
+        Args args = new Args();
+        */
+
+        /*
+        if (SABatchTracingHelper::isAnotherTracingBatchRunning(currentTask))
+        {
+            info("@SABatchTracing:ExistingInstance");
+        }
+        else
+        */
+        {
+            /*
+            SABatchTracingTable::initRecords();
+            SABatchTracingTable::cleanupTraceRecords();
+            */
+            
+            Batch currentTask = BatchHeader::getCurrentBatchTask();
+            BatchHeader batchHeader = BatchHeader::construct(currentTask.BatchJobId);
+            int taskCountMax;
+            int maxTaskToCreate = 500; // SABatchTracingParameters::findOrCreate().MaxTaskToCreate;
+            do
+            {
+                int taskCount = 1;
+                int taskCreatePerBundle = 100; // SABatchTracingParameters::findOrCreate().TaskCreatePerBundle;
+                while (taskCount <= taskCreatePerBundle)
+                {
+                    ISMBatchableTelemetryTaskController batchableTelemetryTaskController =
+                        new ISMBatchableTelemetryTaskController(
+                        _contract.parmBatchableTelemetryTaskServiceClass(), 
+                        _contract.parmBatchableTelemetryTaskServiceMethod());
+                    batchableTelemetryTaskController.parmDialogCaption("Batchable Telemetry Task");
+                    batchHeader.addRuntimeTask(batchableTelemetryTaskController, currentTask.RecId);
+                    batchHeader.save();
+                    taskCount++;
+                    taskCountMax++;
+                }
+
+                /*
+                if(!SABatchTracingTable::taskRunningOnAllServers())
+                {
+                    sleep(pollingDelayTaskBundle * 1000); // Sleep polling bundle and try to launch more
+                }
+                */
+
+            }
+            while (/*!SABatchTracingTable::taskRunningOnAllServers() &&*/ taskCountMax < maxTaskToCreate);
+
+            utcdatetime startBatchTime = DateTimeUtil::utcNow();
+            int pollingDelayStartStop = 10; // SABatchTracingParameters::findOrCreate().PollingDelayStartStop;
+            do
+            {
+                // Keep Controller Task Active while batch is running.
+                // Controller class is checked to prevent duplicate tracing batch jobs from starting.
+                // SABatchTracingTable::updateStatusAllServers();
+
+                // Check for all servers start / stop
+                /*
+                if(SABatchTracingTable::findByServerId('AllServers').Status == SABatchTracingStatus::StartRequested && startRequested == false)
+                {
+                    SABatchTracingHelper::startBatchTracingAllServers(false);
+                    startRequested = true;
+                    stopRequested = false;
+                }
+                else if (SABatchTracingTable::findByServerId('AllServers').Status == SABatchTracingStatus::StopRequested && stopRequested == false)
+                {
+                    SABatchTracingHelper::stopBatchTracingAllServers(false);
+                    startRequested = false;
+                    stopRequested = true;
+                }
+                */
+
+                sleep(pollingDelayStartStop * 1000);
+
+            }
+            while (false /*!SABatchTracingHelper::isTracingBatchCancelled(currentTask.BatchJobId)*/);
+
+        }
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AxEdt xmlns:i="http://www.w3.org/2001/XMLSchema-instance" i:type="AxEdtInt">
+  <Name>ISMBatchableTelemetryTaskCount</Name>
+  <Label>@ISM:ISMBatchableTelemetryTaskCount</Label>
+  <HelpText>@ISM:ISMBatchableTelemetryTaskCountHelp</HelpText>
+</AxEdt>

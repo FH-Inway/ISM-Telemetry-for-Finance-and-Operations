@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ISMBatchableTelemetryBatchStart</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public class ISMBatchableTelemetryBatchStart
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    public static void main(Args _args)
+    {
+        if (_args == null 
+            || _args.record() == null
+            || _args.record().TableId != tableNum(ISMBatchableTelemetryParameterSetup))
+        {
+            throw error(Error::wrongUseOfFunction(funcName()));
+        }
+
+        ISMBatchableTelemetryParameterSetup batchableTelemetryParameterSetup = 
+            _args.record() as ISMBatchableTelemetryParameterSetup;
+
+        BatchHeader batchHeader;
+        batchHeader = BatchHeader::construct();
+        batchHeader.parmCaption("Batch to collect telemetry");
+
+        ISMBatchableTelemetryController batchableTelemetryController 
+            = new ISMBatchableTelemetryController();
+        Object contract = batchableTelemetryController.getDataContractObject();
+        ISMBatchableTelemetryContract batchableTelemetryContract;
+        if (contract && contract is ISMBatchableTelemetryContract)
+        {
+            batchableTelemetryContract = contract as ISMBatchableTelemetryContract;
+            batchableTelemetryContract.parmBatchableTelemetryTaskServiceClass(
+                batchableTelemetryParameterSetup.BatchableTelemetryClass);
+            batchableTelemetryContract.parmBatchableTelemetryTaskServiceMethod(
+                'processOperation');
+        }
+        // update data contract
+        batchHeader.addTask(batchableTelemetryController);
+        batchHeader.save();
+
+        info(strFmt("Batch job scheduled: %1", batchHeader.parmBatchHeaderId()));
+
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

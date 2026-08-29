@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ISMBatchableTelemetryBase</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+abstract class ISMBatchableTelemetryBase extends ISMTelemetryBase
+{
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>initialize</Name>
+				<Source><![CDATA[
+    public void initialize()
+    {
+        super();
+
+
+        if (logParams.RecId == 0)
+        {
+            // Setup for telemetry is being created, setup for batchable telemetry needs to be added
+            if (logParams.validateWrite())
+            {
+                logParams.insert();
+
+                ISMBatchableTelemetryParameterSetup batchableTelemetryParameterSetup;
+                this.initializeBatchableParameterSetup(batchableTelemetryParameterSetup);
+                if (batchableTelemetryParameterSetup.validateWrite())
+                {
+                    batchableTelemetryParameterSetup.insert();
+                }
+            }
+
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>initializeBatchableParameterSetup</Name>
+				<Source><![CDATA[
+    protected void initializeBatchableParameterSetup(
+        ISMBatchableTelemetryParameterSetup _batchableTelemetryParameterSetup)
+    {
+        _batchableTelemetryParameterSetup.ISMTelemetryParameterSetup = logParams.RecId;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

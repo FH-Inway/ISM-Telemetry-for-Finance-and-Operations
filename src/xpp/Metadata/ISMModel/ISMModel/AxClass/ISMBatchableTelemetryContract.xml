@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ISMBatchableTelemetryContract</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[DataContract]
+public class ISMBatchableTelemetryContract
+{
+    private ClassName batchableTelemetryTaskServiceClass;
+    private MethodName batchableTelemetryTaskServiceMethod;
+
+}
+
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>parmBatchableTelemetryTaskServiceClass</Name>
+				<Source><![CDATA[
+    [DataMember]
+    public ClassName parmBatchableTelemetryTaskServiceClass(
+        ClassName _batchableTelemetryTaskServiceClass = batchableTelemetryTaskServiceClass)
+    {
+        batchableTelemetryTaskServiceClass = _batchableTelemetryTaskServiceClass;
+        return batchableTelemetryTaskServiceClass;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>parmBatchableTelemetryTaskServiceMethod</Name>
+				<Source><![CDATA[
+    [DataMember]
+    public MethodName parmBatchableTelemetryTaskServiceMethod(
+        MethodName _batchableTelemetryTaskServiceMethod = batchableTelemetryTaskServiceMethod)
+    {
+        batchableTelemetryTaskServiceMethod = _batchableTelemetryTaskServiceMethod;
+        return batchableTelemetryTaskServiceMethod;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
