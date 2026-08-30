@@ -5,19 +5,19 @@
 		<Declaration><![CDATA[
 // using Microsoft.VisualBasic.Devices;
 
-public class ISMBatchableTelemetryWorkingMemoryTaskService extends SysOperationServiceBase
+public class ISMBatchableTelemetryWorkingMemoryTaskService extends ISMBatchableTelemetryTaskService
 {
 }
 ]]></Declaration>
 		<Methods>
 			<Method>
-				<Name>processOperation</Name>
+				<Name>collectTelemetry</Name>
 				<Source><![CDATA[
-    public void processOperation()
+    public void collectTelemetry(ISMBatchableTelemetryParameterSetup _parameterSetup)
     {
         ISMBatchableTelemetryWorkingMemory workingMemory = ISMBatchableTelemetryWorkingMemory::construct();
 
-        System.Diagnostics.PerformanceCounter memoryPerformanceCounter = 
+        System.Diagnostics.PerformanceCounter memoryPerformanceCounter =
             new System.Diagnostics.PerformanceCounter('Memory', 'Available MBytes');
         real totalAvailableRAM = memoryPerformanceCounter.RawValue;
 

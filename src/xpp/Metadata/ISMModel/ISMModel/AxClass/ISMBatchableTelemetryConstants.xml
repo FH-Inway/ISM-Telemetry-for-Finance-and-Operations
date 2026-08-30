@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ISMBatchableTelemetryConstants</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public class ISMBatchableTelemetryConstants
+{
+    /// <summary>
+    /// Server id for the aggregating status record in the ISMBatchableTelemetryStatus table.
+    /// </summary>
+    public const str AllServers = 'AllServers';
+
+    /// <summary>
+    /// Determines the maximum number of batch tasks to create for a given telemetry collection.
+    /// </summary>
+    public const int MaxTaskToCreate = 500;
+
+    /// <summary>
+    /// The delay, in seconds, between polling the batch job status for start and stop requests.
+    /// </summary>
+    public const int PollingDelayStartStop = 10;
+}
+]]></Declaration>
+		<Methods />
+	</SourceCode>
+</AxClass>

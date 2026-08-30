@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ISMBatchableTelemetryTaskService</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public abstract class ISMBatchableTelemetryTaskService extends SysOperationServiceBase
+{
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>processOperation</Name>
+				<Source><![CDATA[
+    public void processOperation(ISMBatchableTelemetryContract _contract)
+    {
+        Batch currentTask = BatchHeader::getCurrentBatchTask();
+        ISMBatchableTelemetryParameterSetup telemetryParameterSetup = 
+            ISMBatchableTelemetryParameterSetup::findByTaskServiceClass(
+                _contract.parmBatchableTelemetryTaskServiceClass());
+
+        // First task on the batch server to run, this is the activer one per server.
+        // Other tasks should do nothing.
+        if (!ISMBatchableTelemetryStatusTable::tryUpdateBatchRecId(
+            currentTask, telemetryParameterSetup))
+        {
+            return;
+        }
+            
+        // Set status to Stopped to signal that batch task is ready to collect telemetry
+        ISMBatchableTelemetryStatusTable::updateStatus(
+            telemetryParameterSetup,
+            currentTask.ServerId,
+            ISMBatchableTelemetryStatus::Stopped);
+            
+        // Batch job will continue to run until cancelled
+        boolean batchRunning = true;
+        int pollingDelayStartStop = ISMBatchableTelemetryConstants::PollingDelayStartStop;
+        while (batchRunning == true)
+        {
+            // First, wait for the start requested status to be set by the controller batch job
+            ISMBatchableTelemetryStatusTable currentStatusTable;
+            do 
+            {
+                currentStatusTable = ISMBatchableTelemetryStatusTable::findByTelemetryAndServer(
+                    telemetryParameterSetup,
+                    currentTask.ServerId);
+
+                // Check if batch job is cancelled
+                if (ISMBatchableTelemetryHelper::isTelemetryBatchJobCancelled(currentTask.BatchJobId))
+                {
+                    batchRunning = false;
+                    break;
+                }
+
+                sleep(pollingDelayStartStop * 1000);
+            }
+            while (currentStatusTable.Status != ISMBatchableTelemetryStatus::StartRequested);
+
+            if (!batchRunning)
+            {
+                break; // Batch was cancelled
+            }
+
+            ISMBatchableTelemetryStatusTable::updateStatus(
+                telemetryParameterSetup,
+                currentTask.ServerId,
+                ISMBatchableTelemetryStatus::Started);
+
+            // Main loop to collect telemetry
+            while (currentStatusTable.Status != ISMBatchableTelemetryStatus::StopRequested)
+            {
+                currentStatusTable = ISMBatchableTelemetryStatusTable::findByTelemetryAndServer(
+                    telemetryParameterSetup,
+                    currentTask.ServerId);
+
+                // Check if batch job is cancelled
+                if (ISMBatchableTelemetryHelper::isTelemetryBatchJobCancelled(currentTask.BatchJobId))
+                {
+                    batchRunning = false;
+                    break;
+                }
+
+                this.collectTelemetry(telemetryParameterSetup);
+
+                sleep(pollingDelayStartStop * 1000);
+            }
+        }
+
+        ISMBatchableTelemetryStatusTable::updateStatus(
+            telemetryParameterSetup,
+            currentTask.ServerId,
+            ISMBatchableTelemetryStatus::NotReady);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>collectTelemetry</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Collects telemetry data.
+    /// </summary>
+    /// <param name = "_parameterSetup">
+    /// The batchable telemetry parameter setup.
+    /// </param>
+    /// <remarks>
+    /// This method must be implemented by the derived class to collect telemetry data.
+    /// </remarks>
+    public abstract void collectTelemetry(ISMBatchableTelemetryParameterSetup _parameterSetup)
+    {
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

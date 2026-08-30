@@ -9,6 +9,29 @@ public class ISMBatchableTelemetryParameterSetup extends common
 ]]></Declaration>
 		<Methods>
 			<Method>
+				<Name>findByTaskServiceClass</Name>
+				<Source><![CDATA[
+    /// <summary>
+    ///
+    /// </summary>
+    public static ISMBatchableTelemetryParameterSetup findByTaskServiceClass(
+        ClassName _taskServiceClassName, boolean _forupdate = false)
+    {
+        ISMBatchableTelemetryParameterSetup parameterSetup = null;
+        parameterSetup.selectForUpdate(_forupdate);
+
+        if (_taskServiceClassName)
+        {
+            select firstonly parameterSetup
+                where parameterSetup.BatchableTelemetryTaskServiceClass == _taskServiceClassName;
+        }
+
+        return parameterSetup;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
 				<Name>shouldThrowExceptionOnZeroDelete</Name>
 				<Source><![CDATA[
     /// <summary>
@@ -56,7 +79,7 @@ public class ISMBatchableTelemetryParameterSetup extends common
 			<Name>BatchableTelemetryFields</Name>
 			<Fields>
 				<AxTableFieldGroupField>
-					<DataField>BatchableTelemetryClass</DataField>
+					<DataField>BatchableTelemetryTaskServiceClass</DataField>
 				</AxTableFieldGroupField>
 				<AxTableFieldGroupField>
 					<DataField>IntervalValue</DataField>
@@ -76,7 +99,7 @@ public class ISMBatchableTelemetryParameterSetup extends common
 		</AxTableField>
 		<AxTableField xmlns=""
 			i:type="AxTableFieldString">
-			<Name>BatchableTelemetryClass</Name>
+			<Name>BatchableTelemetryTaskServiceClass</Name>
 			<ExtendedDataType>ISMBatchableTelemetryClass</ExtendedDataType>
 			<IgnoreEDTRelation>Yes</IgnoreEDTRelation>
 		</AxTableField>
@@ -97,9 +120,18 @@ public class ISMBatchableTelemetryParameterSetup extends common
 	<Indexes>
 		<AxTableIndex>
 			<Name>ISMTelemetryParameterSetupIdx</Name>
+			<AlternateKey>Yes</AlternateKey>
 			<Fields>
 				<AxTableIndexField>
 					<DataField>ISMTelemetryParameterSetup</DataField>
+				</AxTableIndexField>
+			</Fields>
+		</AxTableIndex>
+		<AxTableIndex>
+			<Name>BatchableTelemetryClassIdx</Name>
+			<Fields>
+				<AxTableIndexField>
+					<DataField>BatchableTelemetryTaskServiceClass</DataField>
 				</AxTableIndexField>
 			</Fields>
 		</AxTableIndex>

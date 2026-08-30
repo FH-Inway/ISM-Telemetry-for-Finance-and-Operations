@@ -166,11 +166,11 @@
 										<Controls>
 											<AxFormControl xmlns=""
 												i:type="AxFormStringControl">
-												<Name>BatchableTelemetryFields_BatchableTelemetryClass</Name>
+												<Name>BatchableTelemetryFields_BatchableTelemetryTaskServiceClass</Name>
 												<Type>String</Type>
 												<FormControlExtension
 													i:nil="true" />
-												<DataField>BatchableTelemetryClass</DataField>
+												<DataField>BatchableTelemetryTaskServiceClass</DataField>
 												<DataSource>ISMBatchableTelemetryParameterSetup</DataSource>
 											</AxFormControl>
 											<AxFormControl xmlns=""

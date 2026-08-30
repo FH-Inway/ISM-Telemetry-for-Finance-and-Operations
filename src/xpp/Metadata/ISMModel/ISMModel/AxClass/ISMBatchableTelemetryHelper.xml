@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ISMBatchableTelemetryHelper</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public class ISMBatchableTelemetryHelper
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>allTasksSubmitted</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Checks if all batch tasks were submitted. Used to see if the telemetry collection partially started.
+    /// </summary>
+    /// <returns>True or false</returns>
+    public static boolean allTasksSubmitted(ISMBatchableTelemetryParameterSetup _batchableTelemetryParameterSetup)
+    {
+        Batch batch;
+        select firstonly1 RecId, BatchJobId from batch
+            where batch.ClassNumber == className2Id(_batchableTelemetryParameterSetup.BatchableTelemetryTaskServiceClass)
+                && batch.Status == BatchStatus::Executing;
+
+        if (batch && batch.RecId != 0)
+        {
+            Batch batchCount;
+            select count(RecId) from batchCount
+                where batchCount.BatchJobId == batch.BatchJobId;
+            if (batchCount.RecId >= ISMBatchableTelemetryConstants::MaxTaskToCreate)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>isTelemetryBatchJobCancelled</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Checks if telemetry batch job is cancelled
+    /// </summary>
+    /// <param name="_batchJobId">BatchJobId</param>
+    /// <returns>True or false</returns>
+    public static boolean isTelemetryBatchJobCancelled(RecId _batchJobId)
+    {
+        BatchJob batchJob;
+
+        select firstonly1 batchJob
+            where batchJob.RecId == _batchJobId;
+          
+        if (batchJob)
+        {
+            if (batchJob.Status == BatchStatus::Cancelling  || batchJob.Status == BatchStatus::Canceled)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>isAnotherTelemetryBatchRunning</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Checks if there is an active batch job of the same telemetry class
+    /// </summary>
+    /// <param name="_thisBatch">batch record</param>
+    /// <returns>True or false</returns>
+    public static boolean isAnotherTelemetryBatchRunning(Batch _thisBatch)
+    {
+        Batch batch;
+   
+        // TODO: Need to check on specific telemetry class, not on generic controller.
+        select firstonly RecId from batch
+            where batch.ClassNumber == classNum(ISMBatchableTelemetryController)
+                && batch.BatchJobId != _thisBatch.BatchJobId
+                && batch.Status == BatchStatus::Executing;
+
+        return (batch && batch.RecId != 0) ? true : false;
+
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

@@ -58,7 +58,7 @@ public class ISMBatchableTelemetryWorkingMemory extends ISMBatchableTelemetryBas
     {
         super(_batchableTelemetryParameterSetup);
 
-        _batchableTelemetryParameterSetup.BatchableTelemetryClass = 
+        _batchableTelemetryParameterSetup.BatchableTelemetryTaskServiceClass = 
             classId2Name(classNum(ISMBatchableTelemetryWorkingMemoryTaskService));
     }
 

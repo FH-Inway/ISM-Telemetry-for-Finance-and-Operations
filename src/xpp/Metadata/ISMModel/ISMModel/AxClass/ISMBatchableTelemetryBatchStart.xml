@@ -35,7 +35,7 @@ public class ISMBatchableTelemetryBatchStart
         {
             batchableTelemetryContract = contract as ISMBatchableTelemetryContract;
             batchableTelemetryContract.parmBatchableTelemetryTaskServiceClass(
-                batchableTelemetryParameterSetup.BatchableTelemetryClass);
+                batchableTelemetryParameterSetup.BatchableTelemetryTaskServiceClass);
             batchableTelemetryContract.parmBatchableTelemetryTaskServiceMethod(
                 'processOperation');
         }
