@@ -303,6 +303,11 @@
       <Name>ISMBatchableTelemetryStatus</Name>
       <Link>ISMBatchableTelemetryStatus</Link>
     </Content>
+    <Content Include="AxEnum\ISMTelemetryMode">
+      <SubType>Content</SubType>
+      <Name>ISMTelemetryMode</Name>
+      <Link>Base objects\ISMTelemetryMode</Link>
+    </Content>
     <Content Include="AxEnum\ISMTelemetrySeverityLevel">
       <SubType>Content</SubType>
       <Name>ISMTelemetrySeverityLevel</Name>

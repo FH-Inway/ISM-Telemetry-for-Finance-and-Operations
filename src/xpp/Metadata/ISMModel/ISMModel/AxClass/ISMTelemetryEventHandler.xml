@@ -12,6 +12,8 @@ internal final class ISMTelemetryEventHandler
 {
     
 
+    
+
 }
 ]]></Declaration>
 		<Methods>
@@ -27,33 +29,70 @@ internal final class ISMTelemetryEventHandler
     FormEventHandler(formStr(SysIntParameters), FormEventType::Initializing)]
     public static void sysIntParameters_OnInitializing(xFormRun sender, FormEventArgs e)
     {
-        ISMTelemetryParameterSetup::initializeParameterSetups();
+        ISMTelemetryParameterSetup::initializeParameterSetups(ISMTelemetryMode::Triggered);
+        ISMTelemetryParameterSetup::initializeParameterSetups(ISMTelemetryMode::Batchable);
     }
 
 ]]></Source>
 			</Method>
 			<Method>
-				<Name>ISMTelemetryConfiguration_OnClicked</Name>
+				<Name>ISMTriggeredTelemetryConfiguration_OnClicked</Name>
 				<Source><![CDATA[
     /// <summary>
-    /// Opens the telemetry configuration dialog for the selected telemetry parameter setup.
+    /// Opens the triggered telemetry configuration dialog for the selected telemetry parameter setup.
     /// </summary>
     /// <param name="sender">The sender of the event.</param>
     /// <param name="e">Event arguments associated with the event.</param>
     [
         SuppressBPWarning('BPParameterNotUsed', 'Parameter required by the event interface.'),
         FormControlEventHandler(
-            formControlStr(SysIntParameters, ISMTelemetryConfiguration), 
+            formControlStr(SysIntParameters, ISMTriggeredTelemetryConfiguration), 
             FormControlEventType::Clicked)
     ]
-    public static void ISMTelemetryConfiguration_OnClicked(
+    public static void ISMTriggeredTelemetryConfiguration_OnClicked(
         FormControl sender, 
         FormControlEventArgs e)
     {
         FormRun formRun = sender.formRun();
         FormDataSource formDataSource = 
-            formRun.dataSource(formDataSourceStr(SysIntParameters, ISMTelemetryParameterSetup));
-        ISMTelemetryParameterSetup telemetryParameterSetup = formDataSource.cursor();
+            formRun.dataSource(formDataSourceStr(SysIntParameters, ISMTelemetryParameterSetupTriggerable));
+        ISMTelemetryEventHandler::manageTelemetryConfiguratin(formDataSource);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>ISMBatchableTelemetryConfiguration_OnClicked</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Opens the batchable telemetry configuration dialog for the selected telemetry parameter setup.
+    /// </summary>
+    /// <param name="sender">The sender of the event.</param>
+    /// <param name="e">Event arguments associated with the event.</param>
+    [
+        SuppressBPWarning('BPParameterNotUsed', 'Parameter required by the event interface.'),
+        FormControlEventHandler(
+            formControlStr(SysIntParameters, ISMBatchableTelemetryConfiguration),
+            FormControlEventType::Clicked)
+    ]
+    public static void ISMBatchableTelemetryConfiguration_OnClicked(
+        FormControl sender,
+        FormControlEventArgs e)
+    {
+        FormRun formRun = sender.formRun();
+        FormDataSource formDataSource =
+            formRun.dataSource(formDataSourceStr(SysIntParameters, ISMTelemetryParameterSetupBatchable));
+        ISMTelemetryEventHandler::manageTelemetryConfiguratin(formDataSource);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>manageTelemetryConfiguratin</Name>
+				<Source><![CDATA[
+    private static void manageTelemetryConfiguratin(FormDataSource _formDataSource)
+    {
+        ISMTelemetryParameterSetup telemetryParameterSetup = _formDataSource.cursor();
         DictClass dictClass = new DictClass(className2Id(telemetryParameterSetup.TelemetryClass));
         ISMTelemetryBase telemetry = dictClass.makeObject();
         if (ISMTelemetryConfigurationDialogController::telemetryConfigurationDialog(telemetry))
@@ -65,25 +104,49 @@ internal final class ISMTelemetryEventHandler
 ]]></Source>
 			</Method>
 			<Method>
-				<Name>ISMTelemetryReinitializeParameterSetups_OnClicked</Name>
+				<Name>ISMTriggeredTelemetryReinitializeParameterSetups_OnClicked</Name>
 				<Source><![CDATA[
     /// <summary>
-    /// Handles the click event for reinitializing telemetry parameter setups.
+    /// Handles the click event for reinitializing triggered telemetry parameter setups.
     /// </summary>
     /// <param name="sender">The sender of the event.</param>
     /// <param name="e">Event arguments associated with the event.</param>
     [
         SuppressBPWarning('BPParameterNotUsed', 'Parameter required by the event interface.'),
         FormControlEventHandler(
-            formControlStr(SysIntParameters, ISMTelemetryReinitializeParameterSetups), 
+            formControlStr(SysIntParameters, ISMTriggeredTelemetryReinitializeParameterSetups), 
             FormControlEventType::Clicked)
     ]
-    public static void ISMTelemetryReinitializeParameterSetups_OnClicked(
+    public static void ISMTriggeredTelemetryReinitializeParameterSetups_OnClicked(
         FormControl sender, FormControlEventArgs e)
     {
-        ISMTelemetryParameterSetup::reinitializeParameterSetups();
+        ISMTelemetryParameterSetup::reinitializeParameterSetups(ISMTelemetryMode::Triggered);
         sender.formRun().dataSource(
-            formDataSourceStr(SysIntParameters, ISMTelemetryParameterSetup)).research();
+            formDataSourceStr(SysIntParameters, ISMTelemetryParameterSetupTriggerable)).research();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>ISMBatchableTelemetryReinitializeParameterSetups_OnClicked</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Handles the click event for reinitializing batchable telemetry parameter setups.
+    /// </summary>
+    /// <param name="sender">The sender of the event.</param>
+    /// <param name="e">Event arguments associated with the event.</param>
+    [
+        SuppressBPWarning('BPParameterNotUsed', 'Parameter required by the event interface.'),
+        FormControlEventHandler(
+            formControlStr(SysIntParameters, ISMBatchableTelemetryReinitializeParameterSetups),
+            FormControlEventType::Clicked)
+    ]
+    public static void ISMBatchableTelemetryReinitializeParameterSetups_OnClicked(
+        FormControl sender, FormControlEventArgs e)
+    {
+        ISMTelemetryParameterSetup::reinitializeParameterSetups(ISMTelemetryMode::Batchable);
+        sender.formRun().dataSource(
+            formDataSourceStr(SysIntParameters, ISMTelemetryParameterSetupBatchable)).research();
     }
 
 ]]></Source>

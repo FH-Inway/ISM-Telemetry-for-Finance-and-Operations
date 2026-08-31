@@ -141,6 +141,7 @@ public class ISMBatchableTelemetryParameterSetup extends common
 		<AxTableRelation xmlns=""
 			i:type="AxTableRelationForeignKey">
 			<Name>ISMTelemetryParameterSetup</Name>
+			<OnDelete>Cascade</OnDelete>
 			<RelatedTable>ISMTelemetryParameterSetup</RelatedTable>
 			<Constraints>
 				<AxTableRelationConstraint xmlns=""

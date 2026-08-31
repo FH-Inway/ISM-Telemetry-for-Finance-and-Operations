@@ -45,11 +45,24 @@ public class ISMTelemetryParameterSetup extends common
     /// <summary>
     /// Initializes the parameter setups for all child classes of ISMTelemetryBase.
     /// </summary>
-    public static void initializeParameterSetups()
+    public static void initializeParameterSetups(ISMTelemetryMode _telemetryMode)
     {
-        ClassName baseClassName = classStr(ISMTelemetryBase);
+        ClassName baseClassName;
+
+        switch (_telemetryMode)
+        {
+            case ISMTelemetryMode::Triggered:
+                baseClassName = classStr(ISMTelemetryBase);
+                break;
+            case ISMTelemetryMode::Batchable:
+                baseClassName = classStr(ISMBatchableTelemetryBase);
+                break;
+            default:
+                throw error("@ISMTelemetry:InvalidTelemetryMode");
+        }
+
         SysDictClass dictClass = new SysDictClass(className2Id(baseClassName));
-        List extendedClassList = dictClass.extendedBy();
+        List extendedClassList = dictClass.extendedBy(false);
         //loop through all child classes
         if (extendedClassList.elements())
         {
@@ -84,14 +97,32 @@ public class ISMTelemetryParameterSetup extends common
     /// <summary>
     /// Reinitializes the parameter setups by deleting all existing setups and recreating them.
     /// </summary>
-    public static void reinitializeParameterSetups()
+    public static void reinitializeParameterSetups(ISMTelemetryMode _telemetryMode)
     {
         ISMTelemetryParameterSetup paramSetup;
-        ttsbegin;
-        delete_from paramSetup;
-        ttscommit;
+        ISMBatchableTelemetryParameterSetup batchableParamSetup;
 
-        ISMTelemetryParameterSetup::initializeParameterSetups();
+        switch (_telemetryMode)
+        {
+            case ISMTelemetryMode::Triggered:
+                ttsbegin;
+                delete_from paramSetup
+                    notexists join batchableParamSetup
+                        where batchableParamSetup.ISMTelemetryParameterSetup == paramSetup.RecId;
+                ttscommit;
+                break;
+            case ISMTelemetryMode::Batchable:
+                ttsbegin;
+                delete_from paramSetup
+                    exists join batchableParamSetup
+                        where batchableParamSetup.ISMTelemetryParameterSetup == paramSetup.RecId;
+                ttscommit;
+                break;
+            default:
+                throw error("@ISMTelemetry:InvalidTelemetryMode");
+        }
+
+        ISMTelemetryParameterSetup::initializeParameterSetups(_telemetryMode);
     }
 
 ]]></Source>

@@ -1,4 +1,7 @@
-﻿ISMTelemetryAddCallStackError=Telemetry Add Call Stack Error - className : %1
+﻿ISMBatchableTelemetry=ISM BatchableTelemetry
+ISMBatchableTelemetryHelp=Batchable Telemetry for Industry Solutions Monitoring is telemetry that is collected by batch jobs. Unlike regular batch jobs, these batch jobs can be executed on all servers and in shorter intervals than are possible with standard batch jobs. More information at https://github.com/microsoft/ISM-Telemetry-for-Finance-and-Operations
+ISMInvalidTelemetryMode=Invalid telemetry mode
+ISMTelemetryAddCallStackError=Telemetry Add Call Stack Error - className : %1
 ISMTelemetryClass=Telemetry class
 ISMTelemetryConfiguration=Telemetry configuration
 ISMTelemetryConfigurationDescription=Configuration for telemetry %1
@@ -26,3 +29,5 @@ ISMTelemetrySeverityLevelHelp=Defines the level of logging, the higher the level
 ISMTelemetrySeverityVerbose=Verbose
 ISMTelemetrySeverityWarning=Warning
 ISMTelemetryTraceError=Telemetry Trace Processing Error: className : %1 - TraceMessage: %2
+ISMTriggeredTelemetry=ISM Triggered Telemetry
+ISMTriggeredTelemetryHelp=Triggered Telemetry for Industry Solutions Monitoring is telemetry that is collected by specific triggers. More information at https://github.com/microsoft/ISM-Telemetry-for-Finance-and-Operations
