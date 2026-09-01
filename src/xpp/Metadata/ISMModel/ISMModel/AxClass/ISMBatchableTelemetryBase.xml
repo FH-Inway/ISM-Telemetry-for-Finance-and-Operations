@@ -3,7 +3,7 @@
 	<Name>ISMBatchableTelemetryBase</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
-abstract class ISMBatchableTelemetryBase extends ISMTelemetryBase
+public abstract class ISMBatchableTelemetryBase extends ISMTelemetryBase
 {
 
 }

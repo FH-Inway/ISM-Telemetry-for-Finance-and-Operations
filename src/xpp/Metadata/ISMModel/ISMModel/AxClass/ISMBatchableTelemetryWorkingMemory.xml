@@ -45,7 +45,7 @@ public class ISMBatchableTelemetryWorkingMemory extends ISMBatchableTelemetryBas
 				<Source><![CDATA[
     protected ClassName metricName()
     {
-        return 'Memory';
+        return 'Remaining Memory MB';
     }
 
 ]]></Source>
