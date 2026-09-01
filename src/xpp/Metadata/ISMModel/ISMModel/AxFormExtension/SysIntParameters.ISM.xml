@@ -249,6 +249,16 @@
 												<MenuItemName>ISMBatchableTelemetryBatchStart</MenuItemName>
 												<MenuItemType>Action</MenuItemType>
 											</AxFormControl>
+											<AxFormControl xmlns=""
+												i:type="AxFormMenuFunctionButtonControl">
+												<Name>ISMBatchableTelemetryStatus</Name>
+												<Type>MenuFunctionButton</Type>
+												<FormControlExtension
+													i:nil="true" />
+												<DataSource>ISMBatchableTelemetryParameterSetup</DataSource>
+												<MenuItemName>ISMBatchableTelemetryStatus</MenuItemName>
+												<NeedsRecord>Yes</NeedsRecord>
+											</AxFormControl>
 										</Controls>
 									</AxFormControl>
 								</Controls>
@@ -338,6 +348,17 @@
 										</Controls>
 										<DataGroup>BatchableTelemetryFields</DataGroup>
 										<DataSource>ISMBatchableTelemetryParameterSetup</DataSource>
+									</AxFormControl>
+									<AxFormControl xmlns=""
+										i:type="AxFormComboBoxControl">
+										<Name>ISMBatchableTelemetryStatusTable_Status</Name>
+										<AllowEdit>No</AllowEdit>
+										<Type>ComboBox</Type>
+										<FormControlExtension
+											i:nil="true" />
+										<DataField>Status</DataField>
+										<DataSource>ISMBatchableTelemetryStatusTable</DataSource>
+										<Items />
 									</AxFormControl>
 								</Controls>
 								<DataSource>ISMTelemetryParameterSetupBatchable</DataSource>
@@ -449,6 +470,9 @@
 			<ReferencedDataSources />
 			<AllowCreate>No</AllowCreate>
 			<AllowDelete>No</AllowDelete>
+			<InsertAtEnd>No</InsertAtEnd>
+			<InsertIfEmpty>No</InsertIfEmpty>
+			<MaxAccessRight>Edit</MaxAccessRight>
 			<DataSourceLinks />
 			<DerivedDataSources />
 		</AxFormDataSource>
@@ -483,6 +507,59 @@
 			<LinkType>InnerJoin</LinkType>
 			<AllowCreate>No</AllowCreate>
 			<AllowDelete>No</AllowDelete>
+			<InsertAtEnd>No</InsertAtEnd>
+			<InsertIfEmpty>No</InsertIfEmpty>
+			<MaxAccessRight>Edit</MaxAccessRight>
+			<DataSourceLinks />
+			<DerivedDataSources />
+		</AxFormDataSource>
+		<AxFormDataSource xmlns="">
+			<Name>ISMBatchableTelemetryStatusTable</Name>
+			<Table>ISMBatchableTelemetryStatusTable</Table>
+			<Fields>
+				<AxFormDataSourceField>
+					<DataField>Batch</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>CreatedBy</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>CreatedDateTime</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>ModifiedBy</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>ModifiedDateTime</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>ParameterSetup</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>Partition</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>RecId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>ServerId</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>Status</DataField>
+				</AxFormDataSourceField>
+				<AxFormDataSourceField>
+					<DataField>TableId</DataField>
+				</AxFormDataSourceField>
+			</Fields>
+			<ReferencedDataSources />
+			<JoinSource>ISMBatchableTelemetryParameterSetup</JoinSource>
+			<LinkType>InnerJoin</LinkType>
+			<AllowCreate>No</AllowCreate>
+			<AllowDelete>No</AllowDelete>
+			<AllowEdit>No</AllowEdit>
+			<InsertAtEnd>No</InsertAtEnd>
+			<InsertIfEmpty>No</InsertIfEmpty>
+			<MaxAccessRight>View</MaxAccessRight>
 			<DataSourceLinks />
 			<DerivedDataSources />
 		</AxFormDataSource>

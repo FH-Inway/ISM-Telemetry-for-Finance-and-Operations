@@ -538,6 +538,17 @@ public class ISMBatchableTelemetryStatusTable extends common
 			<Name>AutoBrowse</Name>
 			<Fields />
 		</AxTableFieldGroup>
+		<AxTableFieldGroup>
+			<Name>ServerStatus</Name>
+			<Fields>
+				<AxTableFieldGroupField>
+					<DataField>ServerId</DataField>
+				</AxTableFieldGroupField>
+				<AxTableFieldGroupField>
+					<DataField>Status</DataField>
+				</AxTableFieldGroupField>
+			</Fields>
+		</AxTableFieldGroup>
 	</FieldGroups>
 	<Fields>
 		<AxTableField xmlns=""

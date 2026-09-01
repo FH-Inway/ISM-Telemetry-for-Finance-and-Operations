@@ -11,7 +11,6 @@
 internal final class ISMTelemetryEventHandler
 {
     
-
     
 
 }
@@ -147,6 +146,29 @@ internal final class ISMTelemetryEventHandler
         ISMTelemetryParameterSetup::reinitializeParameterSetups(ISMTelemetryMode::Batchable);
         sender.formRun().dataSource(
             formDataSourceStr(SysIntParameters, ISMTelemetryParameterSetupBatchable)).research();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>ISMBatchableTelemetryStatusTable_OnInitialized</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Filter to the AllServers status.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    [
+        FormDataSourceEventHandler(
+            formDataSourceStr(SysIntParameters, ISMBatchableTelemetryStatusTable), 
+            FormDataSourceEventType::Initialized)
+     ]
+    public static void ISMBatchableTelemetryStatusTable_OnInitialized(
+        FormDataSource sender, FormDataSourceEventArgs e)
+    {
+        sender.queryBuildDataSource()
+            .addRange(fieldNum(ISMBatchableTelemetryStatusTable, ServerId))
+            .value(ISMBatchableTelemetryConstants::AllServers);
     }
 
 ]]></Source>
