@@ -139,6 +139,41 @@ abstract class ISMTelemetryBase
 ]]></Source>
 			</Method>
 			<Method>
+				<Name>processMetricWithDimensions</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Creates a metric telemetry with up to 3 dimensions.
+    /// </summary>
+    /// <param name = "_value">Value of the metric</param>
+    /// <param name = "_dimension1Name">Name of the first dimension</param>
+    /// <param name = "_dimension1Value">Value of the first dimension</param>
+    /// <param name = "_dimension2Name">Name of the second dimension</param>
+    /// <param name = "_dimension2Value">Value of the second dimension</param>
+    /// <param name = "_dimension3Name">Name of the third dimension</param>
+    /// <param name = "_dimension3Value">Value of the third dimension</param>
+    public final void processMetricWithDimensions(
+        real _value, 
+        str _dimension1Name, str _dimension1Value, 
+        str _dimension2Name = '', str _dimension2Value = '', 
+        str _dimension3Name = '', str _dimension3Value = '')
+    {
+        try
+        {
+            this.logMetricWithDimensions(
+                _value, 
+                _dimension1Name, _dimension1Value, 
+                _dimension2Name, _dimension2Value, 
+                _dimension3Name, _dimension3Value);
+        }
+        catch
+        {
+            warning(strFmt("@ISM:ISMTelemetryMetricError",classId2Name(classIdGet(this))));
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
 				<Name>addStandardProperties</Name>
 				<Source><![CDATA[
     /// <summary>
