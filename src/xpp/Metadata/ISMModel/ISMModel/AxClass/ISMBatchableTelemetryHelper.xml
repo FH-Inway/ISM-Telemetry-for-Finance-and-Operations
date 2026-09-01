@@ -90,6 +90,28 @@ public class ISMBatchableTelemetryHelper
 
 ]]></Source>
 			</Method>
+			<Method>
+				<Name>cleanupFinishedBatchTasks</Name>
+				<Source><![CDATA[
+    public static void cleanupFinishedBatchTasks(RecId _batchJobId)
+    {
+        Batch batch;
+
+        while select forupdate batch
+            where batch.BatchJobId == _batchJobId
+                && batch.Status == BatchStatus::Finished
+                && batch.ClassNumber == classNum(ISMBatchableTelemetryTaskController)
+        {
+            if (batch.validateDelete())
+            {
+                batch.delete();
+            }
+        }
+
+    }
+
+]]></Source>
+			</Method>
 		</Methods>
 	</SourceCode>
 </AxClass>

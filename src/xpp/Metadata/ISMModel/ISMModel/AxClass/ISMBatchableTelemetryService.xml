@@ -85,6 +85,8 @@ public class ISMBatchableTelemetryService extends SysOperationServiceBase
                 // TODO: Controller class is checked to prevent duplicate batch jobs from starting.
                 // Previous comment from batch tracing, unclear how it relates to the next line or how this is done.
                 ISMBatchableTelemetryStatusTable::updateStatusOfAllServersRecord(telemetryParameterSetup);
+
+                ISMBatchableTelemetryHelper::cleanupFinishedBatchTasks(currentTask.BatchJobId);
                 
                 // Check for all servers start / stop
                 ISMBatchableTelemetryStatusTable statusTable = 
