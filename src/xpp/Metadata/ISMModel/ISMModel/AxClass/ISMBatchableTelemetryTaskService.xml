@@ -32,6 +32,15 @@ public abstract class ISMBatchableTelemetryTaskService extends SysOperationServi
             telemetryParameterSetup,
             currentTask.ServerId,
             ISMBatchableTelemetryStatus::Stopped);
+
+        ttsbegin;
+        Batch batchUpdate = Batch::findRecId(currentTask.RecId, true);
+        batchUpdate.Caption = strFmt("Collecting Telemetry on Server %1", currentTask.ServerId);
+        if (batchUpdate.validateWrite())
+        {
+            batchUpdate.update();
+        }
+        ttscommit;
             
         // Batch job will continue to run until cancelled
         boolean batchRunning = true;
