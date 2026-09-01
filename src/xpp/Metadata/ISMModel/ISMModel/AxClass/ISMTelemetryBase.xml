@@ -789,7 +789,9 @@ abstract class ISMTelemetryBase
     /// <param name="_value">Value of the metric</param>
     protected void logMetric(real _value)
     {
-        SysApplicationInsightsTelemetryLogger::instance().trackMetric(this.metricName(), _value);
+        SysApplicationInsightsTelemetryLogger::instance().trackMetricWithDimensions(
+            this.metricName(), _value,
+            ISMTelemetryProperties::AOS, new Session().AOSName());
     }
 
 ]]></Source>
