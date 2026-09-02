@@ -553,7 +553,7 @@
 			</Fields>
 			<ReferencedDataSources />
 			<JoinSource>ISMBatchableTelemetryParameterSetup</JoinSource>
-			<LinkType>InnerJoin</LinkType>
+			<LinkType>OuterJoin</LinkType>
 			<AllowCreate>No</AllowCreate>
 			<AllowDelete>No</AllowDelete>
 			<AllowEdit>No</AllowEdit>
