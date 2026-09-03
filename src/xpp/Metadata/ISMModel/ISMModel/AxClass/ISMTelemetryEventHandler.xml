@@ -62,7 +62,7 @@ internal final class ISMTelemetryEventHandler
         FormRun formRun = sender.formRun();
         FormDataSource formDataSource = 
             formRun.dataSource(formDataSourceStr(SysIntParameters, ISMTelemetryParameterSetupTriggerable));
-        ISMTelemetryEventHandler::manageTelemetryConfiguratin(formDataSource);
+        ISMTelemetryEventHandler::manageTelemetryConfiguration(formDataSource);
     }
 
 ]]></Source>
@@ -88,15 +88,15 @@ internal final class ISMTelemetryEventHandler
         FormRun formRun = sender.formRun();
         FormDataSource formDataSource =
             formRun.dataSource(formDataSourceStr(SysIntParameters, ISMTelemetryParameterSetupBatchable));
-        ISMTelemetryEventHandler::manageTelemetryConfiguratin(formDataSource);
+        ISMTelemetryEventHandler::manageTelemetryConfiguration(formDataSource);
     }
 
 ]]></Source>
 			</Method>
 			<Method>
-				<Name>manageTelemetryConfiguratin</Name>
+				<Name>manageTelemetryConfiguration</Name>
 				<Source><![CDATA[
-    private static void manageTelemetryConfiguratin(FormDataSource _formDataSource)
+    private static void manageTelemetryConfiguration(FormDataSource _formDataSource)
     {
         ISMTelemetryParameterSetup telemetryParameterSetup = _formDataSource.cursor();
         DictClass dictClass = new DictClass(className2Id(telemetryParameterSetup.TelemetryClass));
