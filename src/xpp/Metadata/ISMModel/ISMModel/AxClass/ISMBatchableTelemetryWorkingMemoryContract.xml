@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ISMBatchableTelemetryWorkingMemoryContract</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[DataContract]
+class ISMBatchableTelemetryWorkingMemoryContract implements SysPackable
+{
+    private str metricName;
+    private boolean logAsMetric;
+    private boolean logAsEvent;
+
+    #define.CurrentVersion(1)
+    #localmacro.CurrentList
+        metricName,
+        logAsMetric,
+        logAsEvent
+    #endmacro
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>parmMetricName</Name>
+				<Source><![CDATA[
+    [
+        DataMember,
+        SysOperationLabel("Metric Name"),
+        SysOperationHelpText("The name of the metric to log the remaining memory as.")
+    ]
+    public str parmMetricName(str _metricName = metricName)
+    {
+        metricName = _metricName;
+        return metricName;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>parmLogAsMetric</Name>
+				<Source><![CDATA[
+    [
+        DataMember,
+        SysOperationLabel("Log as Metric"),
+        SysOperationHelpText("Indicates whether to log the remaining memory as a metric.")
+    ]
+    public boolean parmLogAsMetric(boolean _logAsMetric = logAsMetric)
+    {
+        logAsMetric = _logAsMetric;
+        return logAsMetric;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>parmLogAsEvent</Name>
+				<Source><![CDATA[
+    [
+        DataMember,
+        SysOperationLabel("Log as Event"),
+        SysOperationHelpText("Indicates whether to log the remaining memory as an event.")
+    ]
+    public boolean parmLogAsEvent(boolean _logAsEvent = logAsEvent)
+    {
+        logAsEvent = _logAsEvent;
+        return logAsEvent;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>pack</Name>
+				<Source><![CDATA[
+    public container pack()
+    {
+        return [#CurrentVersion, #CurrentList];
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>unpack</Name>
+				<Source><![CDATA[
+    public boolean unpack(container _packedData)
+    {
+        int version = conPeek(_packedData, 1);
+        switch (version)
+        {
+            case #CurrentVersion:
+                [version, #CurrentList] = _packedData;
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

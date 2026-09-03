@@ -21,6 +21,18 @@ public class ISMBatchableTelemetryWorkingMemory extends ISMBatchableTelemetryBas
 ]]></Source>
 			</Method>
 			<Method>
+				<Name>new</Name>
+				<Source><![CDATA[
+    protected void new()
+    {
+        super();
+
+        this.eventId = ISMTelemetryEventIds::ISMEvent;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
 				<Name>postPopulateProperties</Name>
 				<Source><![CDATA[
     protected void postPopulateProperties()
@@ -41,11 +53,104 @@ public class ISMBatchableTelemetryWorkingMemory extends ISMBatchableTelemetryBas
 ]]></Source>
 			</Method>
 			<Method>
+				<Name>telemetryConfigurationName</Name>
+				<Source><![CDATA[
+    protected ClassName telemetryConfigurationName()
+    {
+        return classStr(ISMBatchableTelemetryWorkingMemoryContract);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getContractDefiningMethodName</Name>
+				<Source><![CDATA[
+    public MethodName getContractDefiningMethodName()
+    {
+        return methodStr(ISMBatchableTelemetryWorkingMemory, defineWorkingMemoryContract);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>defineWorkingMemoryContract</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Method signature provides the contract class to the SysOperation framework to
+    /// dynamically generate the configuration dialog.
+    /// </summary>
+    /// <param name = "_contract">Parameter to define the contract class</param>
+    /// <remarks>
+    /// Method is not called, only defines the contract class via its signature.
+    /// </remarks>
+    public void defineWorkingMemoryContract(ISMBatchableTelemetryWorkingMemoryContract _contract)
+    {
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>fillConfigurationContract</Name>
+				<Source><![CDATA[
+    public void fillConfigurationContract(SysPackable _contract)
+    {
+        ISMBatchableTelemetryWorkingMemoryContract contract;
+        if (_contract && _contract is ISMBatchableTelemetryWorkingMemoryContract)
+        {
+            contract = _contract as ISMBatchableTelemetryWorkingMemoryContract;
+            if (telemetryConfig != null)
+            {
+                contract.unpack(telemetryConfig.pack());
+            }
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>setTelemetryConfiguration</Name>
+				<Source><![CDATA[
+    protected void setTelemetryConfiguration(SysPackable _config)
+    {
+        telemetryConfig = _config as ISMBatchableTelemetryWorkingMemoryContract;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>initializeConfiguration</Name>
+				<Source><![CDATA[
+    protected void initializeConfiguration(SysPackable _configuration)
+    {
+        ISMBatchableTelemetryWorkingMemoryContract contract = 
+            _configuration as ISMBatchableTelemetryWorkingMemoryContract;
+        if (contract)
+        {
+            contract.parmMetricName('Remaining Memory MB');
+            contract.parmLogAsMetric(true);
+            contract.parmLogAsEvent(false);
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getTelemetryConfiguration</Name>
+				<Source><![CDATA[
+    public ISMBatchableTelemetryWorkingMemoryContract getTelemetryConfiguration()
+    {
+        return this.getConfiguration() as ISMBatchableTelemetryWorkingMemoryContract;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
 				<Name>metricName</Name>
 				<Source><![CDATA[
     protected ClassName metricName()
     {
-        return 'Remaining Memory MB';
+        ISMBatchableTelemetryWorkingMemoryContract contract = this.telemetryConfig;
+        return contract.parmMetricName();
     }
 
 ]]></Source>

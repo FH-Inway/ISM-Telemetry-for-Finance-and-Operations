@@ -706,6 +706,21 @@ abstract class ISMTelemetryBase
 ]]></Source>
 			</Method>
 			<Method>
+				<Name>getConfiguration</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Gets the telemetry configuration as a SysPackable object.
+    /// This can be cast into the correct contract type class.
+    /// </summary>
+    /// <returns>The telemetry configuration as a SysPackable object.</returns>
+    public SysPackable getConfiguration()
+    {
+        return telemetryConfig;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
 				<Name>configurationDescription</Name>
 				<Source><![CDATA[
     /// <summary>
