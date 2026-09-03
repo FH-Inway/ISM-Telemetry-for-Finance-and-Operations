@@ -16,6 +16,7 @@ public class ISMBatchableTelemetryWorkingMemoryTaskService extends ISMBatchableT
     public void collectTelemetry(ISMBatchableTelemetryParameterSetup _parameterSetup)
     {
         ISMBatchableTelemetryWorkingMemory workingMemory = ISMBatchableTelemetryWorkingMemory::construct();
+        ISMBatchableTelemetryWorkingMemoryContract workingMemoryContract = workingMemory.getTelemetryConfiguration();
 
         System.Diagnostics.PerformanceCounter memoryPerformanceCounter =
             new System.Diagnostics.PerformanceCounter('Memory', 'Available MBytes');
@@ -27,7 +28,15 @@ public class ISMBatchableTelemetryWorkingMemoryTaskService extends ISMBatchableT
         real totalPhysicalMemory = computerInfo.TotalPhysicalMemory / 1024 / 1024;
         */
 
-        workingMemory.processMetric(totalAvailableRAM);
+        if (workingMemoryContract.parmLogAsMetric())
+        {
+            workingMemory.processMetric(totalAvailableRAM);
+        }
+        if (workingMemoryContract.parmLogAsEvent())
+        {
+            workingMemory.addRuntimeProperty(workingMemoryContract.parmMetricName(), any2Str(totalAvailableRAM));
+            workingMemory.processEvent(workingMemoryContract.parmMetricName());
+        }
     }
 
 ]]></Source>
