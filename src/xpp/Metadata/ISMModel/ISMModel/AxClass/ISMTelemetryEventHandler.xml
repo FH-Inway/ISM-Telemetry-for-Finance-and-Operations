@@ -11,8 +11,6 @@
 internal final class ISMTelemetryEventHandler
 {
     
-    
-
 }
 ]]></Declaration>
 		<Methods>
@@ -30,6 +28,15 @@ internal final class ISMTelemetryEventHandler
     {
         ISMTelemetryParameterSetup::initializeParameterSetups(ISMTelemetryMode::Triggered);
         ISMTelemetryParameterSetup::initializeParameterSetups(ISMTelemetryMode::Batchable);
+        ISMBatchableTelemetryParameterSetup batchableTelemetryParameterSetup;
+        ISMBatchableTelemetryStatusTable statusTable;
+        while select batchableTelemetryParameterSetup
+            exists join statusTable
+                where statusTable.ParameterSetup == batchableTelemetryParameterSetup.RecId
+        {
+            ISMBatchableTelemetryStatusTable::updateStatusOfAllServersRecord(
+                batchableTelemetryParameterSetup);
+        }
     }
 
 ]]></Source>

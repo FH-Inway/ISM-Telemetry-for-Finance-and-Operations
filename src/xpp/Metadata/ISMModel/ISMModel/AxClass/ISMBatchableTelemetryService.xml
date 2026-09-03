@@ -111,6 +111,11 @@ public class ISMBatchableTelemetryService extends SysOperationServiceBase
 
             }
             while (!ISMBatchableTelemetryHelper::isTelemetryBatchJobCancelled(currentTask.BatchJobId));
+
+            ISMBatchableTelemetryStatusTable::updateStatus(
+                telemetryParameterSetup, 
+                ISMBatchableTelemetryConstants::AllServers, 
+                ISMBatchableTelemetryStatus::NotReady);
         }
     }
 

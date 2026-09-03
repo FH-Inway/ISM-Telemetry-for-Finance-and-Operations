@@ -228,6 +228,7 @@
 												<Type>Button</Type>
 												<FormControlExtension
 													i:nil="true" />
+												<NeedsRecord>Yes</NeedsRecord>
 												<Text>@ISM:ISMTelemetryConfiguration</Text>
 											</AxFormControl>
 											<AxFormControl xmlns=""
@@ -240,14 +241,34 @@
 												<Text>@ISM:ISMTelemetryReinitializeParameterSetups</Text>
 											</AxFormControl>
 											<AxFormControl xmlns=""
-												i:type="AxFormMenuFunctionButtonControl">
-												<Name>ISMBatchableTelemetryBatchStart</Name>
-												<Type>MenuFunctionButton</Type>
+												i:type="AxFormMenuButtonControl">
+												<Name>BatchableTelemetryBatchJobMenu</Name>
+												<Type>MenuButton</Type>
 												<FormControlExtension
 													i:nil="true" />
-												<DataSource>ISMBatchableTelemetryParameterSetup</DataSource>
-												<MenuItemName>ISMBatchableTelemetryBatchStart</MenuItemName>
-												<MenuItemType>Action</MenuItemType>
+												<Controls>
+													<AxFormControl xmlns=""
+														i:type="AxFormMenuFunctionButtonControl">
+														<Name>ISMBatchableTelemetryBatchStart</Name>
+														<Type>MenuFunctionButton</Type>
+														<FormControlExtension
+															i:nil="true" />
+														<DataSource>ISMBatchableTelemetryParameterSetup</DataSource>
+														<MenuItemName>ISMBatchableTelemetryBatchStart</MenuItemName>
+														<MenuItemType>Action</MenuItemType>
+													</AxFormControl>
+													<AxFormControl xmlns=""
+														i:type="AxFormMenuFunctionButtonControl">
+														<Name>ISMBatchableTelemetryBatchStop</Name>
+														<Type>MenuFunctionButton</Type>
+														<FormControlExtension
+															i:nil="true" />
+														<DataSource>ISMBatchableTelemetryParameterSetup</DataSource>
+														<MenuItemName>ISMBatchableTelemetryBatchStop</MenuItemName>
+														<MenuItemType>Action</MenuItemType>
+													</AxFormControl>
+												</Controls>
+												<Text>Telemetry Batch Job</Text>
 											</AxFormControl>
 											<AxFormControl xmlns=""
 												i:type="AxFormMenuFunctionButtonControl">

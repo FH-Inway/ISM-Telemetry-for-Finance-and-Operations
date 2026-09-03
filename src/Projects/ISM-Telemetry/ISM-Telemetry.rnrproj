@@ -43,6 +43,11 @@
       <Name>ISMBatchableTelemetryBatchStart</Name>
       <Link>Base objects\BatchableTelemetry\ISMBatchableTelemetryBatchStart</Link>
     </Content>
+    <Content Include="AxClass\ISMBatchableTelemetryBatchStop">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryBatchStop</Name>
+      <Link>Base objects\BatchableTelemetry\ISMBatchableTelemetryBatchStop</Link>
+    </Content>
     <Content Include="AxClass\ISMBatchableTelemetryConstants">
       <SubType>Content</SubType>
       <Name>ISMBatchableTelemetryConstants</Name>
@@ -301,7 +306,7 @@
     <Content Include="AxEnum\ISMBatchableTelemetryStatus">
       <SubType>Content</SubType>
       <Name>ISMBatchableTelemetryStatus</Name>
-      <Link>ISMBatchableTelemetryStatus</Link>
+      <Link>Base objects\BatchableTelemetry\ISMBatchableTelemetryStatus</Link>
     </Content>
     <Content Include="AxEnum\ISMTelemetryMode">
       <SubType>Content</SubType>
@@ -318,6 +323,11 @@
       <Name>SysIntParameters.ISM</Name>
       <Link>Base objects\SysIntParameters.ISM</Link>
     </Content>
+    <Content Include="AxForm\ISMBatchableTelemetryStatus">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryStatus</Name>
+      <Link>Base objects\BatchableTelemetry\ISMBatchableTelemetryStatus</Link>
+    </Content>
     <Content Include="AxLabelFile\ISM_en-US">
       <SubType>Content</SubType>
       <Name>ISM_en-US</Name>
@@ -328,6 +338,16 @@
       <Name>ISMBatchableTelemetryBatchStart</Name>
       <Link>Base objects\BatchableTelemetry\ISMBatchableTelemetryBatchStart</Link>
     </Content>
+    <Content Include="AxMenuItemAction\ISMBatchableTelemetryBatchStop">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryBatchStop</Name>
+      <Link>Base objects\BatchableTelemetry\ISMBatchableTelemetryBatchStop</Link>
+    </Content>
+    <Content Include="AxMenuItemDisplay\ISMBatchableTelemetryStatus">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryStatus</Name>
+      <Link>Base objects\BatchableTelemetry\ISMBatchableTelemetryStatus</Link>
+    </Content>
     <Content Include="AxTable\ISMBatchableTelemetryParameterSetup">
       <SubType>Content</SubType>
       <Name>ISMBatchableTelemetryParameterSetup</Name>
@@ -336,7 +356,7 @@
     <Content Include="AxTable\ISMBatchableTelemetryStatusTable">
       <SubType>Content</SubType>
       <Name>ISMBatchableTelemetryStatusTable</Name>
-      <Link>ISMBatchableTelemetryStatusTable</Link>
+      <Link>Base objects\BatchableTelemetry\ISMBatchableTelemetryStatusTable</Link>
     </Content>
     <Content Include="AxTable\ISMTelemetryParameters">
       <SubType>Content</SubType>

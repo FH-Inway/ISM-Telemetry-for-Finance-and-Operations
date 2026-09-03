@@ -23,12 +23,34 @@ public class ISMBatchableTelemetryBatchStart
         ISMBatchableTelemetryParameterSetup batchableTelemetryParameterSetup = 
             _args.record() as ISMBatchableTelemetryParameterSetup;
 
+        ISMBatchableTelemetryStatusTable statusTable;
+        select firstonly1 statusTable
+            where statusTable.ParameterSetup == batchableTelemetryParameterSetup.RecId
+                && statusTable.Batch != 0;
+        Batch batch;
+        BatchJob batchJob;
+        select firstonly1 batchJob
+            exists join batch 
+                where batch.RecId == statusTable.Batch
+                    && batch.BatchJobId == batchJob.RecId
+                    && batchJob.Status != BatchStatus::Finished
+                    && batchJob.Status != BatchStatus::Canceled
+                    && batchJob.Status != BatchStatus::Error
+                    && batchJob.Status != BatchStatus::Hold;
+        if (batchJob.RecId != 0)
+        {
+            warning(strFmt("There is already an active batch job %1 in status %2 for this telemetry", 
+                batchJob.RecId, batchJob.Status));
+            return;
+        }
+
         BatchHeader batchHeader;
         batchHeader = BatchHeader::construct();
         batchHeader.parmCaption("Batch to collect telemetry");
 
         ISMBatchableTelemetryController batchableTelemetryController 
             = new ISMBatchableTelemetryController();
+        // update data contract
         Object contract = batchableTelemetryController.getDataContractObject();
         ISMBatchableTelemetryContract batchableTelemetryContract;
         if (contract && contract is ISMBatchableTelemetryContract)
@@ -39,7 +61,6 @@ public class ISMBatchableTelemetryBatchStart
             batchableTelemetryContract.parmBatchableTelemetryTaskServiceMethod(
                 'processOperation');
         }
-        // update data contract
         batchHeader.addTask(batchableTelemetryController);
         batchHeader.save();
 
