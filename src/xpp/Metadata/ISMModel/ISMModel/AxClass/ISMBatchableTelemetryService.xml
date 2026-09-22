@@ -32,55 +32,38 @@ public class ISMBatchableTelemetryService extends SysOperationServiceBase
             telemetryParameterSetup = ISMBatchableTelemetryParameterSetup::findByTaskServiceClass(
                 _contract.parmBatchableTelemetryTaskServiceClass());
 
-            ISMBatchableTelemetryStatusTable::initRecords(telemetryParameterSetup);
+            ISMBatchableTelemetryStatusTable::initAndUpdateRecords(telemetryParameterSetup);
             ISMBatchableTelemetryStatusTable::cleanupStatusRecords(telemetryParameterSetup);
-            
-            Batch currentTask = BatchHeader::getCurrentBatchTask();
-            BatchHeader batchHeader = BatchHeader::construct(currentTask.BatchJobId);
-            int taskCountMax;
-            int maxTaskToCreate = ISMBatchableTelemetryConstants::MaxTaskToCreate;
-            int pollingDelayTaskBundle = 30; // SABatchTracingParameters::findOrCreate().PollingDelayTaskBundle;
-            do
-            {
-                int taskCount = 1;
-                int taskCreatePerBundle = 100; // SABatchTracingParameters::findOrCreate().TaskCreatePerBundle;
-                while (taskCount <= taskCreatePerBundle)
-                {
-                    ISMBatchableTelemetryTaskController batchableTelemetryTaskController =
-                        new ISMBatchableTelemetryTaskController(
-                        _contract.parmBatchableTelemetryTaskServiceClass(), 
-                        _contract.parmBatchableTelemetryTaskServiceMethod());
-                    Object contract = batchableTelemetryTaskController.getDataContractObject();
-                    ISMBatchableTelemetryContract batchableTelemetryContract;
-                    if (contract && contract is ISMBatchableTelemetryContract)
-                    {
-                        batchableTelemetryContract = contract as ISMBatchableTelemetryContract;
-                        batchableTelemetryContract.parmBatchableTelemetryTaskServiceClass(
-                            telemetryParameterSetup.BatchableTelemetryTaskServiceClass);
-                        batchableTelemetryContract.parmBatchableTelemetryTaskServiceMethod(
-                            'processOperation');
-                    }
-                    batchableTelemetryTaskController.parmDialogCaption("Batchable Telemetry Task");
-                    batchHeader.addRuntimeTask(batchableTelemetryTaskController, currentTask.RecId);
-                    batchHeader.save();
-                    taskCount++;
-                    taskCountMax++;
-                }
 
-                if (!ISMBatchableTelemetryStatusTable::existsTaskOnAllServers(telemetryParameterSetup))
-                {
-                    sleep(pollingDelayTaskBundle * 1000); // Sleep polling bundle and try to launch more
-                }
-            }
-            while (!ISMBatchableTelemetryStatusTable::existsTaskOnAllServers(telemetryParameterSetup) 
-                && taskCountMax < maxTaskToCreate);
+            this.floodServers(_contract, telemetryParameterSetup);
 
             utcdatetime startBatchTime = DateTimeUtil::utcNow();
             int pollingDelayStartStop = 10; // SABatchTracingParameters::findOrCreate().PollingDelayStartStop;
             boolean startRequested = false;
             boolean stopRequested = true;
+            Batch currentTask = BatchHeader::getCurrentBatchTask();
             do
             {
+                // Continously monitor the server states and update if necessary.
+                // This includes adding or removing servers in case the environment is scaled up or down.
+                // This will also set a server status to NotReady if the batch task for that server
+                // is no longer executing (e.g. in case of an error).
+                ISMBatchableTelemetryStatusTable::initAndUpdateRecords(telemetryParameterSetup);
+
+                // Stops batch jobs that were incorrectly created with just telemetry collection tasks.
+                // See comment in floodServers method for details.
+                ISMBatchableTelemetryStatusTable::stopBatchTasksInWrongBatchJobs(
+                    telemetryParameterSetup, currentTask.BatchJobId);
+                
+                // Check if the servers need to be flooded again, in case a server was added or a
+                // batch task has failed.
+                if (ISMBatchableTelemetryStatusTable::needsFlooding(telemetryParameterSetup))
+                {
+                    this.floodServers(_contract, telemetryParameterSetup);
+
+                    startRequested = false;
+                }
+
                 // Keep Controller Task Active while batch is running.
                 // TODO: Controller class is checked to prevent duplicate batch jobs from starting.
                 // Previous comment from batch tracing, unclear how it relates to the next line or how this is done.
@@ -117,6 +100,70 @@ public class ISMBatchableTelemetryService extends SysOperationServiceBase
                 ISMBatchableTelemetryConstants::AllServers, 
                 ISMBatchableTelemetryStatus::NotReady);
         }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>floodServers</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Floods all servers with telemetry tasks.
+    /// New batch tasks will be created until all servers have a task executing or the maximum number 
+    /// of tasks has been created.
+    /// </summary>
+    /// <param name = "_contract">The telemetry contract.</param>
+    /// <param name = "_telemetryParameterSetup">The telemetry parameter setup.</param>
+    public void floodServers(
+        ISMBatchableTelemetryContract _contract,
+        ISMBatchableTelemetryParameterSetup _telemetryParameterSetup)
+    {
+        // In case of a recovery flooding, this may result in a new batch job with just the
+        // telemetry collection tasks. The controller task is still running in the original batch job
+        // and will not manage the new batch job. This can happen repeatedly, resulting in multiple running
+        // telemetry collection tasks.
+        // The main loop (see processOperation method) will check for this and stop the new batch 
+        // jobs that were created incorrectly.
+        // TODO: Find another way to ensure that telemetry collection tasks area always created in the same batch job as the controller task
+        Batch currentTask = BatchHeader::getCurrentBatchTask();
+        BatchHeader batchHeader = BatchHeader::construct(currentTask.BatchJobId);
+        int taskCountMax;
+        int maxTaskToCreate = ISMBatchableTelemetryConstants::MaxTaskToCreate;
+        int pollingDelayTaskBundle = 30; // SABatchTracingParameters::findOrCreate().PollingDelayTaskBundle;
+        do
+        {
+            int taskCount = 1;
+            int taskCreatePerBundle = 100; // SABatchTracingParameters::findOrCreate().TaskCreatePerBundle;
+            while (taskCount <= taskCreatePerBundle)
+            {
+                ISMBatchableTelemetryTaskController batchableTelemetryTaskController =
+                        new ISMBatchableTelemetryTaskController(
+                        _contract.parmBatchableTelemetryTaskServiceClass(),
+                        _contract.parmBatchableTelemetryTaskServiceMethod());
+                Object contract = batchableTelemetryTaskController.getDataContractObject();
+                ISMBatchableTelemetryContract batchableTelemetryContract;
+                if (contract && contract is ISMBatchableTelemetryContract)
+                {
+                    batchableTelemetryContract = contract as ISMBatchableTelemetryContract;
+                    batchableTelemetryContract.parmBatchableTelemetryTaskServiceClass(
+                            _telemetryParameterSetup.BatchableTelemetryTaskServiceClass);
+                    batchableTelemetryContract.parmBatchableTelemetryTaskServiceMethod(
+                            'processOperation');
+                }
+                batchableTelemetryTaskController.parmDialogCaption("Batchable Telemetry Task");
+                batchHeader.addRuntimeTask(batchableTelemetryTaskController, currentTask.RecId);
+                batchHeader.save();
+                taskCount++;
+                taskCountMax++;
+            }
+
+            if (!ISMBatchableTelemetryStatusTable::existsTaskOnAllServers(_telemetryParameterSetup))
+            {
+                sleep(pollingDelayTaskBundle * 1000); // Sleep polling bundle and try to launch more
+            }
+        }
+        while (!ISMBatchableTelemetryStatusTable::existsTaskOnAllServers(_telemetryParameterSetup)
+                && taskCountMax < maxTaskToCreate);
     }
 
 ]]></Source>

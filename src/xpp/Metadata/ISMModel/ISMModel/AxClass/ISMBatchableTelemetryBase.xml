@@ -30,7 +30,7 @@ public abstract class ISMBatchableTelemetryBase extends ISMTelemetryBase
                 {
                     batchableTelemetryParameterSetup.insert();
                 }
-                ISMBatchableTelemetryStatusTable::initRecords(batchableTelemetryParameterSetup);
+                ISMBatchableTelemetryStatusTable::initAndUpdateRecords(batchableTelemetryParameterSetup);
             }
 
         }

@@ -112,6 +112,49 @@ public class ISMBatchableTelemetryHelper
 
 ]]></Source>
 			</Method>
+			<Method>
+				<Name>stopBatchJob</Name>
+				<Source><![CDATA[
+    public static void stopBatchJob(RecId _batchJobId)
+    {
+        Batch batch;
+        BatchJob batchJob;
+        ttsbegin;
+        select firstonly1 forupdate batchJob
+            where batchJob.RecId == _batchJobId;
+        if (batchJob.RecId == 0)
+        {
+            warning("There exists no batch job to stop.");
+            return;
+        }
+        if (batchJob.Status == BatchStatus::Finished
+            || batchJob.Status == BatchStatus::Canceled
+            || batchJob.Status == BatchStatus::Error
+            || batchJob.Status == BatchStatus::Hold)
+        {
+            warning("The batch job is already stopped.");
+            return;
+        }
+
+        if (batchJob.Status == BatchStatus::Executing)
+        {
+            // Update the status to canceled
+            batchJob.Status = BatchStatus::Cancelling;
+            if (batchJob.validateWrite())
+            {
+                batchJob.update();
+                info(strFmt("Batch job %1 was stopped", batchJob.RecId));
+            }
+        }
+        else
+        {
+            info(strFmt("Batch job %1 in state %2 cannot be stopped", batch.RecId, batchJob.Status));
+        }
+        ttscommit;
+    }
+
+]]></Source>
+			</Method>
 		</Methods>
 	</SourceCode>
 </AxClass>

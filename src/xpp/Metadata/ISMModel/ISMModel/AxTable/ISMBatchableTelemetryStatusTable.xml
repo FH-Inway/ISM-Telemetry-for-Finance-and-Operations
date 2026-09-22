@@ -47,15 +47,16 @@ public class ISMBatchableTelemetryStatusTable extends common
 ]]></Source>
 			</Method>
 			<Method>
-				<Name>initRecords</Name>
+				<Name>initAndUpdateRecords</Name>
 				<Source><![CDATA[
     /// <summary>
-    /// Initialize the status records for the telemetry for all servers.
+    /// Initializes and updates the status records for the telemetry for all servers and the
+    /// AllServers record.
     /// </summary>
     /// <param name="_batchableTelemetryParameterSetup">
-    /// The batchable telemetry parameter setup record to initialize the status records for.
+    /// The batchable telemetry parameter setup record to initialize and update the status records for.
     /// </param>
-    public static void initRecords(ISMBatchableTelemetryParameterSetup _batchableTelemetryParameterSetup)
+    public static void initAndUpdateRecords(ISMBatchableTelemetryParameterSetup _batchableTelemetryParameterSetup)
     {
 
         ISMBatchableTelemetryStatusTable statusTable;
@@ -423,13 +424,22 @@ public class ISMBatchableTelemetryStatusTable extends common
         ISMBatchableTelemetryStatusTable statusTable;
         boolean updateSuccessful = false;
 
+        /*
+        UserConnection dbConnection;
+        dbConnection = new UserConnection();
+        statusTable.setConnection(dbConnection);
+        dbConnection.ttsbegin();
+        */
+
         try
         {
             ttsbegin;
             statusTable.readCommittedLock(true);
             statusTable.readPast(true);
             // TODO: Can't use find method, would break the dbConnection; unclear if dbConnection is needed
-            select firstonly1 forupdate statusTable
+            // Using pessimistic lock instead of forupdate since update conflicts are likely
+            // to happen when multiple batch tasks try to update the status table record.
+            select firstonly1 pessimisticlock statusTable
                 where statusTable.ParameterSetup == _batchableTelemetryParameterSetup.RecId
                     && statusTable.ServerId == _currentTask.ServerId;
             if (statusTable)
@@ -447,6 +457,9 @@ public class ISMBatchableTelemetryStatusTable extends common
                     }
                 }
             }
+            /*
+            // Normally, the status record should already exist, so there should be no need to create one.
+            // Due to the pessimistic lock, this may execute although the record already exists
             else
             {
                 statusTable.ServerId = _currentTask.ServerId;
@@ -459,15 +472,112 @@ public class ISMBatchableTelemetryStatusTable extends common
                     updateSuccessful = true;
                 }
             }
+            */
             ttscommit;
+            /*
+            dbConnection.ttscommit();
+            dbConnection.finalize();
+            */
         }
         catch (Exception::Error)
         {
             ttsabort;
+            // dbConnection.ttsabort();
+            exceptionTextFallThrough();
+        }
+        catch (Exception::DuplicateKeyException)
+        {
+            ttsabort;
+            // dbConnection.ttsabort();
+            exceptionTextFallThrough();
+        }
+        catch (Exception::UpdateConflict)
+        {
+            ttsabort;
+            // dbConnection.ttsabort();
             exceptionTextFallThrough();
         }
 
         return updateSuccessful;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>needsFlooding</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Checks if the telemetry collection batch task needs to be flooded to all servers.
+    /// </summary>
+    /// <param name = "_batchableTelemetryParameterSetup">
+    /// The parameter setup of the batchable telemetry.
+    /// </param>
+    /// <returns>Boolean indicating if flooding is needed.</returns>
+    /// <remarks>
+    /// Flooding is needed if there are servers that do not have the telemetry collection 
+    /// batch task assigned or if the batch task is not running on a server that should have it.
+    /// </remarks>
+    public static boolean needsFlooding(ISMBatchableTelemetryParameterSetup _batchableTelemetryParameterSetup)
+    {
+        ISMBatchableTelemetryStatusTable statusTable;
+        SysServerConfig sysServerConfig;
+
+        select firstonly1 RecId from sysServerConfig
+            notexists join statusTable
+                where statusTable.ServerId == sysServerConfig.ServerId
+                    && statusTable.ParameterSetup == _batchableTelemetryParameterSetup.RecId
+                    && statusTable.Batch != 0;
+
+        if (sysServerConfig.RecId != 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>areBatchTasksRunningInWrongBatchJob</Name>
+				<Source><![CDATA[
+    public static boolean areBatchTasksRunningInWrongBatchJob(
+        ISMBatchableTelemetryParameterSetup _batchableTelemetryParameterSetup,
+        RecId _correctBatchJobId)
+    {
+        ISMBatchableTelemetryStatusTable statusTable;
+        Batch batch;
+        select firstonly1 RecId from statusTable
+            exists join batch
+                where batch.RecId == statusTable.Batch
+                    && batch.BatchJobId != _correctBatchJobId
+                    && statusTable.ParameterSetup == _batchableTelemetryParameterSetup.RecId;
+        if (statusTable.RecId != 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>stopBatchTasksInWrongBatchJobs</Name>
+				<Source><![CDATA[
+    public static void stopBatchTasksInWrongBatchJobs(
+        ISMBatchableTelemetryParameterSetup _batchableTelemetryParameterSetup,
+        RecId _correctBatchJobId)
+    {
+        ISMBatchableTelemetryStatusTable statusTable;
+        Batch batch;
+        while select forupdate statusTable
+            exists join batch
+                where batch.RecId == statusTable.Batch
+                    && batch.BatchJobId != _correctBatchJobId
+                    && statusTable.ParameterSetup == _batchableTelemetryParameterSetup.RecId
+        {
+            ISMBatchableTelemetryHelper::stopBatchJob(batch.BatchJobId);
+        }
     }
 
 ]]></Source>
