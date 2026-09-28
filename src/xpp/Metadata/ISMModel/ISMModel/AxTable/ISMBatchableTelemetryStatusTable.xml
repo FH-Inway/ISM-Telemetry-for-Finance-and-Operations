@@ -330,6 +330,12 @@ public class ISMBatchableTelemetryStatusTable extends common
                 // set AllServers status to Partially Started as tracing started
                 currentAggregatedStatus = ISMBatchableTelemetryStatus::StartedPartially;
             }
+            else if (startedStatusFound && stoppedStatusFound && !otherStatusesFound)
+            {
+                // Some servers started a batch task, some didn't, so the remaining ones need to started
+                // Note: This state was observed during a recovery
+                currentAggregatedStatus = ISMBatchableTelemetryStatus::StartRequested;
+            }
             else if (notReadyStatusFound && otherStatusesFound && currentStatus != ISMBatchableTelemetryStatus::NotReady)
             {
                 // It could be that some servers were not started, but some were, 
@@ -363,7 +369,7 @@ public class ISMBatchableTelemetryStatusTable extends common
         // This means a telemetry collection is started and the servers are ready.
         // Now the AllServers status should be updated to StartRequested to signal the batch tasks to start.
         if (allServersStatusTable.Status == ISMBatchableTelemetryStatus::NotReady
-            && currentAggregatedStatus == ISMBatchableTelemetryStatus::Stopped)
+            && (currentAggregatedStatus == ISMBatchableTelemetryStatus::Stopped))
         {
             currentAggregatedStatus = ISMBatchableTelemetryStatus::StartRequested;
         }
