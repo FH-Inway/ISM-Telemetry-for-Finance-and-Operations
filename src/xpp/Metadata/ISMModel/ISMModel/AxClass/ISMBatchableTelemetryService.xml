@@ -52,8 +52,10 @@ public class ISMBatchableTelemetryService extends SysOperationServiceBase
 
                 // Stops batch jobs that were incorrectly created with just telemetry collection tasks.
                 // See comment in floodServers method for details.
+                /* TODO
                 ISMBatchableTelemetryStatusTable::stopBatchTasksInWrongBatchJobs(
                     telemetryParameterSetup, currentTask.BatchJobId);
+                */
                 
                 // Check if the servers need to be flooded again, in case a server was added or a
                 // batch task has failed.
@@ -69,20 +71,26 @@ public class ISMBatchableTelemetryService extends SysOperationServiceBase
                 // Previous comment from batch tracing, unclear how it relates to the next line or how this is done.
                 ISMBatchableTelemetryStatusTable::updateStatusOfAllServersRecord(telemetryParameterSetup);
 
-                ISMBatchableTelemetryHelper::cleanupFinishedBatchTasks(currentTask.BatchJobId);
+                Batch batch;
+                ISMBatchableTelemetryStatusTable statusTable;
+                select firstonly1 batch
+                    exists join statusTable
+                        where batch.RecId == statusTable.Batch
+                            && statusTable.ParameterSetup == telemetryParameterSetup.RecId;
+                ISMBatchableTelemetryHelper::cleanupFinishedBatchTasks(batch.BatchJobId);
                 
                 // Check for all servers start / stop
-                ISMBatchableTelemetryStatusTable statusTable = 
+                ISMBatchableTelemetryStatusTable allServersStatusTable = 
                     ISMBatchableTelemetryStatusTable::findByTelemetryAndServer(
                         telemetryParameterSetup, ISMBatchableTelemetryConstants::AllServers);
-                if (statusTable.Status == ISMBatchableTelemetryStatus::StartRequested 
+                if (allServersStatusTable.Status == ISMBatchableTelemetryStatus::StartRequested 
                     && !startRequested)
                 {
                     ISMBatchableTelemetryStatusTable::startTelemetryCollectionOnAllServers(telemetryParameterSetup);
                     startRequested = true;
                     stopRequested = false;
                 }
-                else if (statusTable.Status == ISMBatchableTelemetryStatus::StopRequested 
+                else if (allServersStatusTable.Status == ISMBatchableTelemetryStatus::StopRequested 
                     && !stopRequested)
                 {
                     // TODO ISMBatchableTelemetryHelper::stopTelemetryCollectionOnAllServers(telemetryParameterSetup);
@@ -118,15 +126,21 @@ public class ISMBatchableTelemetryService extends SysOperationServiceBase
         ISMBatchableTelemetryContract _contract,
         ISMBatchableTelemetryParameterSetup _telemetryParameterSetup)
     {
-        // In case of a recovery flooding, this may result in a new batch job with just the
-        // telemetry collection tasks. The controller task is still running in the original batch job
-        // and will not manage the new batch job. This can happen repeatedly, resulting in multiple running
-        // telemetry collection tasks.
-        // The main loop (see processOperation method) will check for this and stop the new batch 
-        // jobs that were created incorrectly.
-        // TODO: Find another way to ensure that telemetry collection tasks area always created in the same batch job as the controller task
-        Batch currentTask = BatchHeader::getCurrentBatchTask();
-        BatchHeader batchHeader = BatchHeader::construct(currentTask.BatchJobId);
+        BatchHeader batchHeader;
+        Batch batch;
+        ISMBatchableTelemetryStatusTable statusTable;
+        select firstonly1 batch 
+            exists join statusTable
+                where batch.RecId == statusTable.Batch
+                    && statusTable.ParameterSetup == _telemetryParameterSetup.RecId;
+        if (batch.RecId != 0)
+        {
+            batchHeader = BatchHeader::construct(batch.BatchJobId);
+        }
+        else
+        {
+            batchHeader = BatchHeader::construct();
+        }
         int taskCountMax;
         int maxTaskToCreate = ISMBatchableTelemetryConstants::MaxTaskToCreate;
         int pollingDelayTaskBundle = 30; // SABatchTracingParameters::findOrCreate().PollingDelayTaskBundle;
@@ -151,7 +165,7 @@ public class ISMBatchableTelemetryService extends SysOperationServiceBase
                             'processOperation');
                 }
                 batchableTelemetryTaskController.parmDialogCaption("Batchable Telemetry Task");
-                batchHeader.addRuntimeTask(batchableTelemetryTaskController, currentTask.RecId);
+                batchHeader.addTask(batchableTelemetryTaskController);
                 batchHeader.save();
                 taskCount++;
                 taskCountMax++;
