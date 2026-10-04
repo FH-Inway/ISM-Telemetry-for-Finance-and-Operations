@@ -88,6 +88,11 @@
       <Name>ISMBatchableTelemetryWorkingMemory</Name>
       <Link>WorkingMemory\ISMBatchableTelemetryWorkingMemory</Link>
     </Content>
+    <Content Include="AxClass\ISMBatchableTelemetryWorkingMemoryContract">
+      <SubType>Content</SubType>
+      <Name>ISMBatchableTelemetryWorkingMemoryContract</Name>
+      <Link>WorkingMemory\ISMBatchableTelemetryWorkingMemoryContract</Link>
+    </Content>
     <Content Include="AxClass\ISMBatchableTelemetryWorkingMemoryTaskService">
       <SubType>Content</SubType>
       <Name>ISMBatchableTelemetryWorkingMemoryTaskService</Name>
