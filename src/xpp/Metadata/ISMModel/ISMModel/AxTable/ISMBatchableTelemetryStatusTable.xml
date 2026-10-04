@@ -283,9 +283,10 @@ public class ISMBatchableTelemetryStatusTable extends common
         // > If there are multiple states, determine the aggregated state
         else if (serverStatusList.elements() > 1)
         {
-            // TODO: Check if max number of tasks has been exceeded, if so then Batch tracing task may not have started on some servers - status is then partial
-            // Confusing comment from batch tracing, unclear if no update is ok in this case
-            if (!ISMBatchableTelemetryHelper::allTasksSubmitted(_batchableTelemetryParameterSetup))
+            // Unlike batch tracing's task-count gate, telemetry recovery depends on live coverage
+            // per server; resume only when every configured server has an executing task.
+            if (!ISMBatchableTelemetryStatusTable::allServerTasksExecuting(
+                _batchableTelemetryParameterSetup))
             {
                 return;
             }
@@ -378,6 +379,39 @@ public class ISMBatchableTelemetryStatusTable extends common
             _batchableTelemetryParameterSetup, 
             ISMBatchableTelemetryConstants::AllServers, 
             currentAggregatedStatus);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>allServerTasksExecuting</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Checks that every configured server has a linked batch task that is currently executing.
+    /// </summary>
+    /// <param name="_batchableTelemetryParameterSetup">The telemetry configuration to check.</param>
+    /// <returns>True when every configured server has an executing task; otherwise, false.</returns>
+    public static boolean allServerTasksExecuting(
+        ISMBatchableTelemetryParameterSetup _batchableTelemetryParameterSetup)
+    {
+        SysServerConfig sysServerConfig;
+        select count(RecId) from sysServerConfig;
+        int expectedServerCount = sysServerConfig.RecId;
+        if (expectedServerCount == 0)
+        {
+            return false;
+        }
+
+        ISMBatchableTelemetryStatusTable statusTable;
+        Batch batch;
+        select count(RecId) from statusTable
+            exists join batch
+            where statusTable.ParameterSetup == _batchableTelemetryParameterSetup.RecId
+                && batch.RecId == statusTable.Batch
+                && batch.Status == BatchStatus::Executing;
+        int executingServerCount = statusTable.RecId;
+
+        return executingServerCount == expectedServerCount;
     }
 
 ]]></Source>
