@@ -3,7 +3,7 @@
 	<Name>ISMBatchableTelemetryTaskController</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
-public class ISMBatchableTelemetryTaskController extends SysOperationServiceController
+public class ISMBatchableTelemetryTaskController extends SysOperationServiceController implements BatchRetryable
 {
 
 }
@@ -15,6 +15,17 @@ public class ISMBatchableTelemetryTaskController extends SysOperationServiceCont
     public ClassDescription defaultCaption()
     {
         return "Batchable Telemetry Task";
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>isRetryable</Name>
+				<Source><![CDATA[
+    [Wrappable(true), Replaceable(true)]
+    public boolean isRetryable()
+    {
+        return true;
     }
 
 ]]></Source>
