@@ -33,16 +33,6 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="AxClass\ISMTelemetryCollectorStartup">
-      <SubType>Content</SubType>
-      <Name>ISMTelemetryCollectorStartup</Name>
-      <Link>Telemetry Collector\ISMTelemetryCollectorStartup</Link>
-    </Content>
-    <Content Include="AxReference\ISMTelemetryCollector_NETFramework">
-      <SubType>Content</SubType>
-      <Name>ISMTelemetryCollector_NETFramework</Name>
-      <Link>Telemetry Collector\ISMTelemetryCollector_NETFramework</Link>
-    </Content>
     <Content Include="AxClass\ISMBatchableTelemetryBase">
       <SubType>Content</SubType>
       <Name>ISMBatchableTelemetryBase</Name>
@@ -207,6 +197,11 @@
       <SubType>Content</SubType>
       <Name>ISMTelemetryBusinessEvents</Name>
       <Link>BusinessEvent\ISMTelemetryBusinessEvents</Link>
+    </Content>
+    <Content Include="AxClass\ISMTelemetryCollectorStartup">
+      <SubType>Content</SubType>
+      <Name>ISMTelemetryCollectorStartup</Name>
+      <Link>Telemetry Collector\ISMTelemetryCollectorStartup</Link>
     </Content>
     <Content Include="AxClass\ISMTelemetryConfigurationDialogController">
       <SubType>Content</SubType>
