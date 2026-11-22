@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ISMTelemetryCollectorStartup</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+using ISMTelemetry;
+
+/// <summary>
+/// Starts the process-local telemetry collector during AOS startup.
+/// </summary>
+internal final class ISMTelemetryCollectorStartup
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>onSystemStartup</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Starts the collector once for the current AOS application domain.
+    /// </summary>
+    [SubscribesTo(
+        classStr(ApplicationStartupEventManager),
+        delegateStr(ApplicationStartupEventManager, onSystemStartup))]
+    public static void onSystemStartup()
+    {
+        try
+        {
+            TelemetryCollectorHost::EnsureStarted();
+        }
+        catch
+        {
+            warning(strFmt(
+                "ISM telemetry collector could not start: %1",
+                CLRInterop::getLastException().Message));
+        }
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

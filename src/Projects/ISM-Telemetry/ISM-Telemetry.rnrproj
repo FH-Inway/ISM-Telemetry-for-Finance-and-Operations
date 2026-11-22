@@ -33,6 +33,16 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="AxClass\ISMTelemetryCollectorStartup">
+      <SubType>Content</SubType>
+      <Name>ISMTelemetryCollectorStartup</Name>
+      <Link>Telemetry Collector\ISMTelemetryCollectorStartup</Link>
+    </Content>
+    <Content Include="AxReference\ISMTelemetryCollector_NETFramework">
+      <SubType>Content</SubType>
+      <Name>ISMTelemetryCollector_NETFramework</Name>
+      <Link>Telemetry Collector\ISMTelemetryCollector_NETFramework</Link>
+    </Content>
     <Content Include="AxClass\ISMBatchableTelemetryBase">
       <SubType>Content</SubType>
       <Name>ISMBatchableTelemetryBase</Name>
@@ -380,6 +390,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Telemetry Collector" />
     <Folder Include="Base objects" />
     <Folder Include="Base objects\BatchableTelemetry" />
     <Folder Include="Batch Telemetry" />
@@ -391,6 +402,13 @@
     <Folder Include="CostActivation" />
     <Folder Include="Infolog Telemetry" />
     <Folder Include="WorkingMemory" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ISMTelemetryCollector_Build\ISMTelemetryCollector_NETFramework\ISMTelemetryCollector_NETFramework.csproj">
+      <Name>ISMTelemetryCollector_NETFramework</Name>
+      <Project>{b01c6d68-8a2d-4ad2-8f42-b4f6ab4827c3}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
   <Import Project="$(BuildTasksDirectory)\Microsoft.Dynamics.Framework.Tools.BuildTasks.17.0.targets" />

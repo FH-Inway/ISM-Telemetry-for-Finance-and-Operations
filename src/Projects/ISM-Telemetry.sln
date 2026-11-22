@@ -5,6 +5,10 @@ VisualStudioVersion = 17.11.35431.28
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FC65038C-1B2F-41E1-A629-BED71D161FFF}") = "ISM-Telemetry (USR) [Industry Solutions Monitoring]", "ISM-Telemetry\ISM-Telemetry.rnrproj", "{C2CF8A7F-7D33-4CE7-817B-A564B0ABC1CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISMTelemetryCollector_NETFramework", "ISMTelemetryCollector_Build\ISMTelemetryCollector_NETFramework\ISMTelemetryCollector_NETFramework.csproj", "{B01C6D68-8A2D-4AD2-8F42-B4F6AB4827C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISMTelemetryCollector_NETCore", "ISMTelemetryCollector_Build\ISMTelemetryCollector_NETCore\ISMTelemetryCollector_NETCore.csproj", "{6E2D4D5C-B66E-4A2D-B913-77D3BBFD0D72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,6 +16,10 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C2CF8A7F-7D33-4CE7-817B-A564B0ABC1CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C2CF8A7F-7D33-4CE7-817B-A564B0ABC1CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B01C6D68-8A2D-4AD2-8F42-B4F6AB4827C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B01C6D68-8A2D-4AD2-8F42-B4F6AB4827C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E2D4D5C-B66E-4A2D-B913-77D3BBFD0D72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E2D4D5C-B66E-4A2D-B913-77D3BBFD0D72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
