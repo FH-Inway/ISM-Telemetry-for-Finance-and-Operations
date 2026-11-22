@@ -6,6 +6,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 using ISMTelemetry;
+using Microsoft.Dynamics.Integration.Telemetry.AppInsights;
 
 /// <summary>
 /// Starts the process-local telemetry collector during AOS startup.
@@ -26,16 +27,61 @@ internal final class ISMTelemetryCollectorStartup
         staticdelegateStr(ApplicationStartupEventManager, onSystemStartup))]
     public static void onSystemStartup()
     {
+        ISMTelemetryCollectorStartup::ensureStarted();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>onSessionCreated</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Starts the collector when the session startup event path does not invoke onSystemStartup.
+    /// </summary>
+    /// <param name="_isBatch">Whether the session is a batch session.</param>
+    /// <param name="_isInteractive">Whether the session is interactive.</param>
+    [SubscribesTo(
+        classStr(ApplicationStartupEventManager),
+        staticdelegateStr(ApplicationStartupEventManager, onSessionCreated)),
+    SuppressBPWarning(
+        'BPParameterNotUsed',
+        'The parameters are required by the subscribed delegate.')]
+    public static void onSessionCreated(
+        boolean _isBatch,
+        boolean _isInteractive)
+    {
+        ISMTelemetryCollectorStartup::ensureStarted();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>ensureStarted</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Starts the process-local collector if custom metrics are enabled.
+    /// </summary>
+    private static void ensureStarted()
+    {
         try
         {
-            TelemetryCollectorHost::EnsureStarted();
+            if (SysIntParameters::Find().CaptureCustomMetrics)
+            {
+                TelemetryClient telemetryClient =
+                    SysApplicationInsightsTelemetryClientFactory::constructDefaultClient();
+
+                if (telemetryClient)
+                {
+                    TelemetryCollectorHost::EnsureStarted(telemetryClient);
+                }
+            }
         }
         catch
         {
             System.Exception exception = CLRInterop::getLastException();
             warning(strFmt(
                 "ISM telemetry collector could not start: %1",
-                exception.Message));
+                exception.ToString()));
         }
     }
 

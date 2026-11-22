@@ -4,12 +4,24 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
+    <DynamicsPackagesDirectory Condition="'$(DynamicsPackagesDirectory)' == ''">C:\AOSService\PackagesLocalDirectory</DynamicsPackagesDirectory>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="..\Source\**\*.cs">
       <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>$(DynamicsPackagesDirectory)\ApplicationPlatform\bin\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Dynamics.Integration.Telemetry">
+      <HintPath>$(DynamicsPackagesDirectory)\MonitoringAndTelemetry\bin\Microsoft.Dynamics.Integration.Telemetry.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
 
 </Project>

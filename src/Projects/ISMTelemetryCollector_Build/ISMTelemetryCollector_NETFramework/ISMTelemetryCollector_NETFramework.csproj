@@ -8,9 +8,10 @@
     <OutputType>Library</OutputType>
     <RootNamespace>ISMTelemetry</RootNamespace>
     <AssemblyName>ISMTelemetryCollector_NETFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <DynamicsPackagesDirectory Condition="'$(DynamicsPackagesDirectory)' == ''">C:\AOSService\PackagesLocalDirectory</DynamicsPackagesDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +32,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>$(DynamicsPackagesDirectory)\ApplicationPlatform\bin\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Dynamics.Integration.Telemetry">
+      <HintPath>$(DynamicsPackagesDirectory)\MonitoringAndTelemetry\bin\Microsoft.Dynamics.Integration.Telemetry.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Source\**\*.cs">

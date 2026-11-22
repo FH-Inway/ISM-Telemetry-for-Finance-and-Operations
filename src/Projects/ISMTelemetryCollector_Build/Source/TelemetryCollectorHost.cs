@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
+using Microsoft.Dynamics.Integration.Telemetry.AppInsights;
 
 namespace ISMTelemetry
 {
@@ -12,13 +13,22 @@ namespace ISMTelemetry
         private static readonly object SyncRoot = new object();
         private static Timer collectorTimer;
         private static string collectorInstanceId;
+        private static TelemetryClient telemetryClient;
         private static readonly TimeSpan SamplingInterval = TimeSpan.FromMinutes(1);
 
         /// <summary>
         /// Starts collection once for the current application domain.
         /// </summary>
-        public static void EnsureStarted()
+        /// <param name="telemetryClient">
+        /// The configured Dynamics Application Insights telemetry client.
+        /// </param>
+        public static void EnsureStarted(TelemetryClient client)
         {
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
+
             lock (SyncRoot)
             {
                 if (collectorTimer != null)
@@ -27,18 +37,12 @@ namespace ISMTelemetry
                 }
 
                 collectorInstanceId = Guid.NewGuid().ToString("D");
+                telemetryClient = client;
                 collectorTimer = new Timer(
                     Collect,
                     null,
                     Timeout.InfiniteTimeSpan,
                     Timeout.InfiniteTimeSpan);
-
-                Process process = Process.GetCurrentProcess();
-                TelemetryCollectorEventSource.Log.CollectorStarted(
-                    process.Id,
-                    Environment.MachineName,
-                    collectorInstanceId,
-                    AppDomain.CurrentDomain.FriendlyName);
 
                 collectorTimer.Change(TimeSpan.Zero, Timeout.InfiniteTimeSpan);
             }
@@ -50,15 +54,30 @@ namespace ISMTelemetry
             {
                 using (Process process = Process.GetCurrentProcess())
                 {
-                    TelemetryCollectorEventSource.Log.SampleCollected(
-                        process.Id,
-                        process.StartTime.ToUniversalTime().Ticks,
-                        collectorInstanceId,
-                        Environment.MachineName,
-                        AppDomain.CurrentDomain.FriendlyName,
+                    string processId = process.Id.ToString();
+                    string machineName = Environment.MachineName;
+                    string processStartTime = process.StartTime.ToUniversalTime().ToString("o");
+
+                    TrackMetric(
+                        "ISM.Process.WorkingSetBytes",
                         process.WorkingSet64,
+                        processId,
+                        machineName,
+                        processStartTime);
+                    TrackMetric(
+                        "ISM.Process.PrivateMemoryBytes",
                         process.PrivateMemorySize64,
-                        GC.GetTotalMemory(false));
+                        processId,
+                        machineName,
+                        processStartTime);
+                    TrackMetric(
+                        "ISM.Process.ManagedMemoryBytes",
+                        GC.GetTotalMemory(false),
+                        processId,
+                        machineName,
+                        processStartTime);
+
+                    telemetryClient.FlushClient();
                 }
             }
             catch (Exception exception)
@@ -68,19 +87,6 @@ namespace ISMTelemetry
                     collectorInstanceId,
                     exception);
                 Trace.TraceError(failure);
-
-                try
-                {
-                    TelemetryCollectorEventSource.Log.SamplingFailed(
-                        collectorInstanceId,
-                        exception.ToString());
-                }
-                catch (Exception eventSourceException)
-                {
-                    Trace.TraceError(
-                        "ISM telemetry error reporting failed: {0}",
-                        eventSourceException);
-                }
             }
             finally
             {
@@ -90,6 +96,24 @@ namespace ISMTelemetry
                     timer.Change(SamplingInterval, Timeout.InfiniteTimeSpan);
                 }
             }
+        }
+
+        private static void TrackMetric(
+            string metricName,
+            double value,
+            string processId,
+            string machineName,
+            string processStartTime)
+        {
+            telemetryClient.TrackMetricWithDimensions(
+                metricName,
+                value,
+                "ProcessId",
+                processId,
+                "MachineName",
+                machineName,
+                "ProcessStartTimeUtc",
+                processStartTime);
         }
     }
 }
