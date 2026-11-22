@@ -33,6 +33,7 @@ v17
 ## keep VS Projects in PackagesLocalDirectory\Projects
 !/Projects
 src/Projects/**/obj/**
+src/Projects/**/bin/**
 .vs
 *.cache
 
