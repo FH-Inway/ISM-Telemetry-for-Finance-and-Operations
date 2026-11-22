@@ -23,7 +23,7 @@ internal final class ISMTelemetryCollectorStartup
     /// </summary>
     [SubscribesTo(
         classStr(ApplicationStartupEventManager),
-        delegateStr(ApplicationStartupEventManager, onSystemStartup))]
+        staticdelegateStr(ApplicationStartupEventManager, onSystemStartup))]
     public static void onSystemStartup()
     {
         try
@@ -32,9 +32,10 @@ internal final class ISMTelemetryCollectorStartup
         }
         catch
         {
+            System.Exception exception = CLRInterop::getLastException();
             warning(strFmt(
                 "ISM telemetry collector could not start: %1",
-                CLRInterop::getLastException().Message));
+                exception.Message));
         }
     }
 
